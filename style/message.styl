@@ -1,0 +1,124 @@
+.message
+  width: 100%
+  background-color: #f5f5f5
+  .send
+    text-align: center
+    width: 800px
+    margin: 0 auto
+    padding: 10px 0 30px 0
+    label
+      width: 800px
+      display: block
+      vertical-align: top
+      color: #666
+      margin-top: 20px
+    &:after
+      height: 0
+      width: 0
+      border-left: 50px solid transparent
+      border-right: 50px solid transparent
+      border-bottom: 100px solid red
+      display: inline-block
+      span
+        display: inline-block
+        width: 100px
+    input
+      display: inline-block
+      width: 350px
+    textarea
+      display: inline
+      width: 350px
+      height: 100px
+      vertical-align: top
+      resize:none;
+    a
+      width: 50px
+      height: 50px
+      line-height: 36px
+      border-radius: 100%
+      margin: 20px 0 0 0
+      font-weight: bolder
+      font-size: 17px
+      color: #666
+      background-image: none
+    #message
+      height: 70px
+
+  .message-list
+    width: 800px
+    margin: 0 auto
+
+    .node-left
+      text-align: right;
+      padding: 15px 420px 15px 0;
+      background: url("./../assets/images/time-line.png") center center no-repeat
+      .node-item
+        .arrow
+          border-left: 10px solid white
+          left: 100%
+          &:after
+            border-left: 10px solid rgba(0,0,0,.2)
+            left: -9px
+      ul
+          li:nth-child(1)
+            color: #59d5d1
+
+    .node-right
+      text-align: left;
+      padding-left: 420px;
+      background: url("./../assets/images/time-line.png") center center no-repeat
+      .node-item
+        .arrow
+          border-right: 10px solid white
+          right: 100%
+          &:after
+            border-right: 10px solid rgba(0,0,0,.2)
+            left: -1px
+        ul
+          li:nth-child(1)
+            color: #edbb21
+
+    .node-left, .node-right
+      .node-item
+        background-color: #fff
+        border: 1px solid rgba(0,0,0,0.2)
+        border-radius: 6px
+        padding: 8px 15px
+        display: inline-block
+        position: relative
+        z-index: 99
+        max-width: 400px
+        box-shadow: 0 0 3px #ccc;
+        .arrow
+          width: 0
+          height: 0
+          border-top: 10px solid transparent
+          border-bottom: 10px solid transparent
+          position: absolute
+          top: 50%
+          margin-top: -10px
+          &:after
+            width: 0
+            height: 0
+            border-top: 10px solid transparent
+            border-bottom: 10px solid transparent
+            position: absolute
+            content: ""
+            top: -10px
+            z-index: -1
+        ul
+          margin: 0
+          padding: 0
+          list-style: none
+          li:nth-child(1)
+            font-size: 14px
+            &:before
+              content: "•"
+              position: absolute
+              margin-left: -10px
+          li:nth-child(2)
+            color: #666
+            font-size: 12px
+          li:nth-child(3)
+            color: #888
+            font-size: 11px

@@ -1,0 +1,40 @@
+@require "./message"
+@require "./app.styl"
+
+body
+  margin: 0
+  padding: 0
+._header
+  background-color: #0FBAE5
+  text-align: center
+  span
+    display: inline-block
+    padding: 0 65px 0 65px
+    font-size: 50px
+    vertical-align: middle
+    color: white
+    text-shadow: 0 0 4px #028daf
+    position: absolute
+    left: 0
+    line-height: 98px
+  ul
+    display: inline-block
+    margin: 0
+    padding: 0
+    li
+      display: inline-flex
+      width: 100px
+      padding: 33px 10px
+      text-align: center
+      border-radius: 100%
+      a
+        display: inline-block
+        color: white
+        width: 100%
+        text-decoration: none
+      &.active
+        background-color: white
+        border: 6px solid #0FBAE5
+        a
+          color: #0FBAE5
+          font-weight: bold
