@@ -1,9 +1,22 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import jquery from "./../../node_modules/jquery"
+
+import Search from "./_search"
 
 let HeaderTop = React.createClass({
-  handleChange: function(e) {
+  getInitialState() {
+    return {
+      navs: [
+        "HOME",
+        "STUDY",
+        "MESSAGE",
+        "LIFE",
+        "ABOUT",
+      ]
+    }
+  },
+
+  handleChange(e) {
     let node = ReactDOM.findDOMNode(this.refs.root)
 
     $(node).find("li").removeClass("active")
@@ -12,33 +25,28 @@ let HeaderTop = React.createClass({
     this.props.indexChange($(e.target).closest("li").attr("data"))
   },
 
-  renderNavs: function(){
-    let navs = [
-      "HOME",
-      "STUDY",
-      "MESSAGE",
-      "LIFE",
-      "ABOUT"
-    ]
-    
-    return navs.map((name, index) => {
-      let className = index == 2 ? "active" : ""
+  renderNavs(){
+    return this.state.navs.map((name, index) => {
+      let className = index == window.Page.currentPage ? "active" : ""
       return (
-        <li data={ index } className={ className } onClick={ this.handleChange }>
+        <li key={index} data={ index } className={ className } onClick={ this.handleChange }>
           <a href="javascript:;" >{ name }</a>
         </li>
       )
     })
   },
 
-  render: function() {
+  render() {
     return (
       <div className="_header">
         <nav>
-          <span>Blues LI</span>
+          <span className="logo">Blues LI</span>
           <ul ref="root">
             { this.renderNavs() }
           </ul>
+          <span className="search">
+            <Search />
+          </span>
         </nav>
       </div>
     )

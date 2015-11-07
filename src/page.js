@@ -1,3 +1,4 @@
 window.Page = {
-  messageList: []
+  messageList: [],
+  currentPage: 0,
 }

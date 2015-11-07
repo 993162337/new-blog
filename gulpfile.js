@@ -13,7 +13,7 @@ var rename = require("gulp-rename");
 var path = {
   app: "src/app.js",
   javascript: "src/**/*.js",
-  css: "style/*.styl",
+  css: "style/**/*.styl",
 };
 
 gulp.task("serve", ["build-css", "build-js", "watch-js"], function(){

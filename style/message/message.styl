@@ -3,14 +3,14 @@
   background-color: #f5f5f5
   .send
     text-align: center
-    width: 800px
+    width: 100%
     margin: 0 auto
     padding: 10px 0 30px 0
     label
-      width: 800px
+      width: 100%
       display: block
       vertical-align: top
-      color: #666
+      color: $font-color
       margin-top: 20px
     &:after
       height: 0
@@ -39,18 +39,19 @@
       margin: 20px 0 0 0
       font-weight: bolder
       font-size: 17px
-      color: #666
+      color: $font-color
       background-image: none
     #message
       height: 70px
 
   .message-list
-    width: 800px
+    width: 100%
     margin: 0 auto
 
     .node-left
       text-align: right;
-      padding: 15px 420px 15px 0;
+      padding: 15px 0 15px 0;
+      padding-right: 51.5%
       background: url("./../assets/images/time-line.png") center center no-repeat
       .node-item
         .arrow
@@ -65,7 +66,7 @@
 
     .node-right
       text-align: left;
-      padding-left: 420px;
+      padding-left: 51.5%;
       background: url("./../assets/images/time-line.png") center center no-repeat
       .node-item
         .arrow
@@ -117,7 +118,7 @@
               position: absolute
               margin-left: -10px
           li:nth-child(2)
-            color: #666
+            color: $font-color
             font-size: 12px
           li:nth-child(3)
             color: #888

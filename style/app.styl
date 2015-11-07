@@ -1,3 +1,10 @@
+@require "./global"
+
+@require "./_comp/_header"
+@require "./_comp/_tab"
+@require "./home/home"
+@require "./message/message"
+
 body
   background-color: #ECE4E4
   line-height: 13px
@@ -5,7 +12,8 @@ body
     cursor: pointer
     margin-right: 10px
   #container
-    height: 100%
+    .content
+      background-color: #f5f5f5
     .foot
       margin: 0;
       padding: 0;

@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import Header from "./_comp/_header.js"
 
-import Index from "./index/index"
+import Home from "./home/home"
 import Study from "./study/study"
 import Life from "./life/life"
 import Message from "./message/message"
@@ -13,7 +13,7 @@ var Doc = React.createClass({
   getDefaultProps() {
     return {
       contentList: [
-        Index,
+        Home,
         Study,
         Message,
         Life,
@@ -31,7 +31,7 @@ var Doc = React.createClass({
 
   getInitialState() {
     return {
-      currentIndex: 2
+      currentIndex: window.Page.currentPage
     }
   },
 
@@ -44,6 +44,10 @@ var Doc = React.createClass({
 
   componentDidMount() {
     document.title = "Coder - " + this.props.nameList[this.state.currentIndex]
+    let currentHeight = $(window).height() - 148
+
+    let Content = ReactDOM.findDOMNode(this.refs.content)
+    $(Content).css("minHeight", currentHeight + "px")
   },
 
   render() {
@@ -53,7 +57,7 @@ var Doc = React.createClass({
     return (
       <div>
         <Header indexChange={ this.handleIndex } />
-        { current }
+        <div className="content" ref="content">{ current }</div>
         <foot className="foot">® 2015-2015 Blues Inc.</foot>
       </div>
     ) 

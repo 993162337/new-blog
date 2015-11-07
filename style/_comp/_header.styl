@@ -1,13 +1,7 @@
-@require "./message"
-@require "./app.styl"
-
-body
-  margin: 0
-  padding: 0
 ._header
-  background-color: #0FBAE5
+  background-color: $main-blue
   text-align: center
-  span
+  span.logo
     display: inline-block
     padding: 0 65px 0 65px
     font-size: 50px
@@ -36,5 +30,15 @@ body
         background-color: white
         border: 6px solid #0FBAE5
         a
-          color: #0FBAE5
+          color: $main-blue
           font-weight: bold
+  span.search
+    display: inline-block
+    width: 180px
+    vertical-align: middle
+    position: absolute
+    margin: 30px 0 0 15%
+  .input-group
+    position: relative
+
+@media screen and (max-width: 800px)
