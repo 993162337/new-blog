@@ -5,7 +5,7 @@ import Header from "./_comp/_header.js"
 import Home from "./home/home"
 import Study from "./study/study"
 import Life from "./life/life"
-import Message from "./message/message"
+import Words from "./words/words"
 import About from "./about/about"
 import Page from "./page"
 
@@ -15,14 +15,14 @@ var Doc = React.createClass({
       contentList: [
         Home,
         Study,
-        Message,
+        Words,
         Life,
         About
       ],
       nameList: [
         "HOME",
         "STUDY",
-        "MESSAGE",
+        "WORDS",
         "LIFE",
         "ABOUT"
       ]
@@ -35,15 +35,24 @@ var Doc = React.createClass({
     }
   },
 
-  handleIndex(index) {
-    document.title = "Coder - " + this.props.nameList[index]
+  ellipsis() {
+    let node = ReactDOM.findDOMNode(this.refs.content)
+    $(".study-content").ellipsis(20)
+  },
+
+  handleIndex(name) {
+    document.title = "Coder - " + name
+    let nextIndex
+    this.props.nameList.map((item, index) => {
+      if(item == name) nextIndex = index
+    })
     this.setState({
-      currentIndex: index
+      currentIndex: nextIndex
     })
   },
 
   componentDidMount() {
-    document.title = "Coder - " + this.props.nameList[this.state.currentIndex]
+    document.title = "Coder - HOME"
     let currentHeight = $(window).height() - 148
 
     let Content = ReactDOM.findDOMNode(this.refs.content)
@@ -58,7 +67,7 @@ var Doc = React.createClass({
       <div>
         <Header indexChange={ this.handleIndex } />
         <div className="content" ref="content">{ current }</div>
-        <foot className="foot">® 2015-2015 Blues Inc.</foot>
+        <foot className="foot">® 2015 Blues Inc. All right reserved.</foot>
       </div>
     ) 
   }

@@ -7,9 +7,9 @@ let HeaderTop = React.createClass({
   getInitialState() {
     return {
       navs: [
-        "HOME",
+        "WORDS",
         "STUDY",
-        "MESSAGE",
+        "HOME",
         "LIFE",
         "ABOUT",
       ]
@@ -18,16 +18,24 @@ let HeaderTop = React.createClass({
 
   handleChange(e) {
     let node = ReactDOM.findDOMNode(this.refs.root)
+    let newNavs = this.state.navs
 
-    $(node).find("li").removeClass("active")
-    $(e.target).closest("li").addClass("active")
+    let selected = $(e.target).closest("li").text()
+    newNavs.map((item, index) => {
+      if(item == selected) newNavs.splice(index, 1)
+    })
+    newNavs.splice(2, 0, selected)
 
-    this.props.indexChange($(e.target).closest("li").attr("data"))
+    this.setState({
+      navs: newNavs
+    })
+
+    this.props.indexChange(selected)
   },
 
   renderNavs(){
     return this.state.navs.map((name, index) => {
-      let className = index == window.Page.currentPage ? "active" : ""
+      let className = index == 2 ? "active" : ""
       return (
         <li key={index} data={ index } className={ className } onClick={ this.handleChange }>
           <a href="javascript:;" >{ name }</a>

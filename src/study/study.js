@@ -6,6 +6,7 @@ import Tab from "./../_comp/_tab"
 let Study = React.createClass({
   componentDidMount() {
     this.updateData()
+    setTimeout('$(".study-content").ellipsis(350)', 5)
   },
 
   getDefaultProps() {
@@ -51,15 +52,17 @@ let Study = React.createClass({
     let articalList = []
     this.state.list.map((item, key) => {
       return articalList.push(
-        <div className="home-item" key={key}>
-          <a>{ item.title }</a>
-          <span className="home-time">{ item.time }</span>
-          <p className="home-content" dataHtml="true">{ item.content }</p>
+        <div className="study-item" key={key}>
+          <a>{ item.title }</a><br />
+          <span className="study-tag">{ item.mark }</span>
+          <span className="study-time">{ item.time }</span>
+          <p className="study-content">{ item.content }</p>
+          <span className="study-more">more>></span>
         </div>
       )
     })
     return (
-      <div className="home-list">
+      <div className="study-list">
         <Tab onChangeCB={ this.tabChanged }/>
         { articalList }
       </div>
