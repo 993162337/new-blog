@@ -5,7 +5,7 @@ var About = React.createClass({
   render: function() {
     return (
       <div className="about">
-        <div className="about-logo"><img src="./../../assets/images/logo.png" /></div> 
+        <div className="about-logo"><img src="../../assets/images/logo.png" /></div> 
       </div>
     )
   }
