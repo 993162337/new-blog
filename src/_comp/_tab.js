@@ -4,19 +4,6 @@ import ReactDOM from "react-dom"
 import Search from "./_search"
 
 let Tab = React.createClass({
-  getDefaultProps() {
-    return {
-      tabList:[
-        "All",
-        "New",
-        "ReactJS",
-        "CSS",
-        "Note",
-        "Bug",
-      ]
-    }
-  },
-
   getInitialState() {
     return {
       index: 0

@@ -12,6 +12,14 @@ let Study = React.createClass({
   getDefaultProps() {
     return {
       url: "src/home/home-data.json",
+      tabList: [
+        "All",
+        "New",
+        "ReactJS",
+        "CSS",
+        "Note",
+        "Bug",
+      ]
     }
   },
 
@@ -64,7 +72,6 @@ let Study = React.createClass({
       .done(d => {
         d.map(item => {
           if(item.id == id) {
-            console.log(item)
             this.setState({
               artical: item,
               index: 1,
@@ -75,19 +82,31 @@ let Study = React.createClass({
   },
 
   pullBack() {
-    this.updateData()
+    let newList = []
+    let node = ReactDOM.findDOMNode(this.refs.tabList)
+    let text = $(node).find(".active").text() == "All" ? "" : $(node).find(".active").text()
+    console.log(this.state.list)
+    this.state.list.map(item => {
+      if(item.mark.indexOf(text) !== -1) newList.push(item)
+    })
+
+    console.log(newList)
+    this.setState({
+      list: newList,
+      index: 0
+    })
     setTimeout('$(".study-content").ellipsis(350)', 5)
   },
 
   render() {
     let content = [
       <ArticalList list={ this.state.list } getContentCB={ this.getContent } />,
-      <ArticalContent data={ this.state.artical } backCB={ this.pullBack }/>
+      <ArticalContent data={ this.state.artical } backCB={ this.pullBack } />
     ]
 
     return (
       <div className="study-list">
-        <Tab onChangeCB={ this.tabChanged }/>
+        <Tab tabList={ this.props.tabList } onChangeCB={ this.tabChanged } ref="tabList" />
         { content[this.state.index] }
       </div>
     )
@@ -122,7 +141,7 @@ let ArticalContent = React.createClass({
   render() {
     return (
       <div className="artical">
-        <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;&lt;</a></p>
+        <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;-</a></p>
         <h2>{ this.props.data.title }</h2>
         <p className="artical-date">{ this.props.data.time }</p>
         <p className="artical-content">{ this.props.data.content }</p>
