@@ -11,7 +11,7 @@ let Study = React.createClass({
 
   getDefaultProps() {
     return {
-      url: "src/home/home-data.json",
+      url: "src/study/study-data.json",
       tabList: [
         "All",
         "New",
@@ -141,10 +141,10 @@ let ArticalContent = React.createClass({
   render() {
     return (
       <div className="artical">
-        <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;-</a></p>
         <h2>{ this.props.data.title }</h2>
         <p className="artical-date">{ this.props.data.time }</p>
         <p className="artical-content">{ this.props.data.content }</p>
+        <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;-</a></p>
       </div>
     )
   }

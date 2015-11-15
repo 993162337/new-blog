@@ -1,0 +1,25 @@
+@require "./../global"
+@require "./_modal"
+.login
+  .title
+    background-color: $main-blue
+  .content
+    &>span
+      color: $main-red
+      position: absolute
+      width: 230px
+      margin-left: -115px
+      margin-top: -22px
+  .modal-footer
+    padding-top: 25px
+    a
+      color: white
+      width: 80px
+      line-height: 22px
+      display: inline-block
+    .confirm
+      background: $main-blue
+    .cancel
+      background: #bbb
+    a:hover
+      text-decoration: none

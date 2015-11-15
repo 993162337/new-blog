@@ -22,7 +22,6 @@ let Message = React.createClass({
     ReactDOM.findDOMNode(this.refs.message).value = ""
 
     let node = {}
-    // let x = []
     node = {
       name: getName,
       message: getMessage,
@@ -61,6 +60,13 @@ let Message = React.createClass({
     // console.log(this)
   },
 
+  respone(e) {
+    let responeName = $(e.target).closest("li").text()
+    ReactDOM.findDOMNode(this.refs.message).value = "@" + responeName + "："
+    ReactDOM.findDOMNode(this.refs.message).focus()
+
+  },
+
   render() {
     let messageNode = []
     let className1
@@ -79,7 +85,9 @@ let Message = React.createClass({
           <div className="node-item">
             <div className="arrow"></div>
             <ul>
-              <li style={{color: "#" + nameColor}}>{item.name}</li>
+              <li style={{color: "#" + nameColor}}  onClick={ this.respone } title="click to respone him or her">
+                {item.name}
+              </li>
               <li>{item.message}</li>
               <li>{item.time}</li>
             </ul>

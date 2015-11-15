@@ -1,7 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import Modal from "remodal"
 
-import Search from "./_search"
+import Login from "./_login"
+import Signup from "./_signup"
 
 let HeaderTop = React.createClass({
   getInitialState() {
@@ -12,7 +14,9 @@ let HeaderTop = React.createClass({
         "HOME",
         "LIFE",
         "ABOUT",
-      ]
+      ],
+      accountIndex: 0,
+      accountName: "",
     }
   },
 
@@ -37,26 +41,94 @@ let HeaderTop = React.createClass({
     return this.state.navs.map((name, index) => {
       let className = index == 2 ? "active" : ""
       return (
-        <li key={index} data={ index } className={ className } onClick={ this.handleChange }>
-          <a href="javascript:;" >{ name }</a>
+        <li key={index} data={ index } className={ className } >
+          <a href="javascript:;"  onClick={ this.handleChange }>{ name }</a>
         </li>
       )
     })
   },
 
+  logout() {
+    this.setState({
+      accountIndex: 0,
+      accountName: ""
+    })
+  },
+
+  loginSuccess(name) {
+    this.setState({
+      accountName: name,
+      accountIndex: 1,
+    })
+  },
+
   render() {
+    let account = [
+      <LoginSign />,
+      <AccountName name={ this.state.accountName } logout={ this.logout }/>,
+    ]
+
     return (
       <div className="_header">
         <nav>
-          <span className="logo">Blues LI</span>
-          <ul ref="root">
+          <span className="logo">Git</span>
+          <ul ref="root" className="navs">
             { this.renderNavs() }
           </ul>
-          <span className="search">
-            <Search />
-          </span>
+          { account[this.state.accountIndex] }
         </nav>
+        <Login loginCB={ this.loginSuccess }/>
+        <Signup />
       </div>
+    )
+  }
+})
+
+let LoginSign = React.createClass({
+  render() {
+    return (
+      <span className="account-group">
+       <a data-toggle="modal" href="#login" >Log in</a>
+       <a data-toggle="modal" href="#signup" >Sign up</a>
+      </span>
+    )
+  }
+})
+
+let AccountName = React.createClass({
+  componentDidMount() {
+    $("[data-toggle='popover']").popover({
+      trigger: "click",
+      html: true,
+    })
+    $("#logout").on("click", function() {
+      console.log("hahha")
+      this.setState({
+        accountIndex: 0,
+        accountName: ""
+      })
+    })
+  },
+
+  render() {
+    return (
+      <span className="account-name">
+        <div className="btn-group">
+          <button 
+            className="btn dropdown-toggle"
+            type="button"
+            data-toggle="dropdown" 
+            aria-haspopup="true"
+            aria-expanded="false">
+            { this.props.name }
+            <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu">
+            <li onClick={ this.props.logout }>Log out</li>
+          </ul>
+        </div>
+        <img src="../../assets/images/logo.png" />
+      </span>
     )
   }
 })
