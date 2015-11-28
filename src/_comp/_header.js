@@ -71,7 +71,6 @@ let HeaderTop = React.createClass({
     return (
       <div className="_header">
         <nav>
-          <span className="logo">Git</span>
           <ul ref="root" className="navs">
             { this.renderNavs() }
           </ul>

@@ -18,9 +18,9 @@
     li
       display: inline-flex
       width: 100px
-      padding: 33px 10px
+      padding: 10px 10px
       text-align: center
-      border-radius: 100%
+      transition: 0.3s ease
       a
         display: inline-block
         color: white
@@ -36,6 +36,7 @@
         background-color: white
         border: 6px solid #0FBAE5
         transition: 0.3s ease
+        border-radius: 10px
         a
           color: $main-blue
           font-weight: bold
@@ -47,9 +48,10 @@
   .account-group
     position: absolute
     margin-left: 5%
-    margin-top: 38px
+    margin-top: 12px
     vertical-align: middle
     color: white
+    transition: 0.3s ease
     a
       border: 1px solid white
       transition: .3s ease
@@ -97,3 +99,12 @@
       width: 50px
       border-radius: 100%
       border: 1px solid white
+._header:hover
+  .navs
+    li
+      padding: 33px 10px
+    li.active
+      border-radius: 100%
+  .account-group
+   margin-top: 38px
+  

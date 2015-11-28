@@ -53,10 +53,6 @@ var Doc = React.createClass({
 
   componentDidMount() {
     document.title = "Coder - HOME"
-    let currentHeight = $(window).height() - 148
-
-    let Content = ReactDOM.findDOMNode(this.refs.content)
-    $(Content).css("minHeight", currentHeight + "px")
   },
 
   render() {
@@ -64,7 +60,7 @@ var Doc = React.createClass({
     let current = <Content />
 
     return (
-      <div>
+      <div className="content-body">
         <Header indexChange={ this.handleIndex } />
         <div className="content" ref="content">{ current }</div>
         <foot className="foot">® 2015 Blues Inc. All right reserved.</foot>
