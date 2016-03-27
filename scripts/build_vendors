@@ -1,0 +1,46 @@
+#!/bin/bash
+set -eu
+
+vendors_js="
+  jquery
+  bootstrap
+  ellipsis
+  moment
+"
+
+vendors_css="
+  bootstrap
+  bootstrap.theme
+  ellipsis
+  fontawesome
+"
+
+function build_vendors() {
+  local file_type=$1
+  local vendors=$2
+
+  cd dev/assets/$file_type
+
+  files=""
+  for name in $vendors; do
+    files="$files $name.min.$file_type"
+  done
+
+  if [[ $file_type == "js" ]]; then
+    cat $files > vendors.min.js
+  elif [[ $file_type == "css" ]]; then
+    cat $files > vendors.min.css
+  else
+    echo "only js or css files"
+    exit 1
+  fi
+
+  rm -f ../dev/vendors.min.$file_type
+  cp -f vendors.min.$file_type ../../../dev/
+  cd ../../../
+}
+
+build_vendors js "$vendors_js"
+build_vendors css "$vendors_css"
+
+echo -e "\033[1;32m Success! \033[m"
