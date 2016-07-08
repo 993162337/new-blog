@@ -3,11 +3,11 @@ import React from "react"
 import ReactDOM from "react-dom"
 import Header from "./_comp/_header"
 
-import Home from "./home/"
-import Study from "./study/"
-import Life from "./life/"
-import Words from "./words/"
-import About from "./about/"
+import Home from "./home"
+import Study from "./study"
+import Life from "./life"
+import Words from "./words"
+import About from "./about"
 import Page from "./page"
 
 var Doc = React.createClass({
@@ -71,6 +71,12 @@ var Doc = React.createClass({
         </foot>
       </div>
     )
+  },
+
+  render() {
+    return <div>
+      Hello world
+    </div>
   }
 });
 

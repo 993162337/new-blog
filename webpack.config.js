@@ -49,22 +49,21 @@ module.exports = {
         loader: "babel",
         query: {
           cacheDirectory: true,
-          presets: ["es2015", "stage-0"],
+          presets: ["react", "es2015", "stage-0"],
         },
-        loader: "babel",
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        loader: "style!css",
+        loader: "style-loader!css-loader",
       },
       {
         test: /\.styl$/,
-        loader: "style!css!stylus",
+        loader: "style-loader!css-loader!stylus-loader",
       },
       {
         test: /\.(jpg|png|gif|svg)$/,
-        loader: "url?limit=10000&name=images/[path][name].[hash].[ext]",
+        loader: "url-loader?limit=10000&name=images/[path][name].[hash].[ext]",
       },
       {
         test: /\.(json)$/,

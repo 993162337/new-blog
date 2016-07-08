@@ -3,8 +3,8 @@ SHELL := /bin/bash
 assets = "assets/vendor/"
 dist = "dist/"
 
-build_vendors:
+build-vendors:
 	./scripts/build_vendors
 
-app:
+build-app:
 	webpack-dev-server --hot --inline --progress
