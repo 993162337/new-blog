@@ -3,7 +3,7 @@ var path = require("path")
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, "./src/app.jsx"),
+    app: path.join(__dirname, "./app/app.jsx"),
   },
   output: {
     path: path.join(__dirname, "./dev"),
@@ -28,11 +28,11 @@ module.exports = {
       __DEV__: true,
       // __HOST__: JSON.stringify(""),
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ],
   resolve: {
     root: [

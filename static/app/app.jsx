@@ -1,7 +1,7 @@
 import "./app.styl"
 import React from "react"
 import { render } from "react-dom"
-import { Router, Route, IndexRoute, Redirect, browserHistory, withRouter } from "react-router"
+import { Router, Route, IndexRoute, Redirect, hashHistory, withRouter } from "react-router"
 import Header from "./_comp/_header"
 
 import Home from "./home"
@@ -32,7 +32,7 @@ const App = withRouter(
 )
 
 render(
-  <Router history={ browserHistory } >
+  <Router history={ hashHistory } >
     <Route path="/" component={ App }>
       <IndexRoute component={ Home } />
       <Route path="home" component={ Home } />

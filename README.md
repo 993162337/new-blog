@@ -1,5 +1,5 @@
 # new-blog
-new blog develop with reactjs
+new blog develop with nodejs express reactjs stylus fontawsome
 
 <!--
 增加外部引入文件

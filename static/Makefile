@@ -4,12 +4,12 @@ assets = "assets/vendor/"
 dist = "dist/"
 
 build-vendors:
-	./scripts/build_vendors
-
-sever-start:
-	webpack-dev-server --hot --inline --progress
+	./shell/build_vendors
 
 build-app:
+	webpack-dev-server --hot --inline --progress
+
+build-compress:
 	webpack --colors --progress
 
 deploy-web:
