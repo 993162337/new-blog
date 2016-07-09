@@ -4,10 +4,11 @@ var path = require("path")
 module.exports = {
   entry: {
     app: path.join(__dirname, "./app/app.jsx"),
+    init: "./global/init.js"
   },
   output: {
     path: path.join(__dirname, "./dev"),
-    filename: "bundle.min.js",
+    filename: "[name].js",
     chunkFilename: "[name].[chunkhash].js",
   },
   devServer: {
@@ -28,11 +29,6 @@ module.exports = {
       __DEV__: true,
       // __HOST__: JSON.stringify(""),
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   }
-    // })
   ],
   resolve: {
     root: [

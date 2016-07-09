@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import Tab from "../_comp/_tab"
 
-let Study = React.createClass({
+export default React.createClass({
   componentDidMount() {
     this.updateData()
     setTimeout('$(".study-content").ellipsis(350)', 10)
@@ -12,14 +12,7 @@ let Study = React.createClass({
   getDefaultProps() {
     return {
       url: "./study-data.json",
-      tabList: [
-        "All",
-        "New",
-        "ReactJS",
-        "CSS",
-        "Note",
-        "Bug",
-      ]
+      tabList: ["All", "New", "React", "CSS", "Note", "Bug"]
     }
   },
 
@@ -111,7 +104,7 @@ let Study = React.createClass({
   }
 });
 
-let ArticalList = React.createClass({
+const ArticalList = React.createClass({
   render() {
     let articalList = []
 
@@ -143,7 +136,7 @@ let ArticalList = React.createClass({
   }
 })
 
-let ArticalContent = React.createClass({
+const ArticalContent = React.createClass({
   render() {
     return (
       <div className="artical">
@@ -155,5 +148,3 @@ let ArticalContent = React.createClass({
     )
   }
 })
-
-export default Study

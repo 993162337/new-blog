@@ -7,10 +7,10 @@ build-vendors:
 	./shell/build_vendors
 
 build-app:
-	webpack-dev-server --hot --inline --progress
+	webpack-dev-server --config webpack.config.js --hot --inline --progress
 
 build-compress:
-	webpack --colors --progress
+	webpack --config webpack.production.config.js --colors --progress
 
 deploy-web:
 	# cp -rf dev/ ../sever/templates
