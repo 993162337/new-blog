@@ -27,7 +27,7 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true,
-      // __HOST__: JSON.stringify(""),
+      __HOST__: JSON.stringify("http://localhost:8081"),
     }),
   ],
   resolve: {
@@ -37,6 +37,9 @@ module.exports = {
       path.join(__dirname, "components"),
     ],
     extensions: ["", ".jsx", ".js", ".styl", ".json"],
+    alias: {
+      "utils": "global/utils"
+    }
   },
   module: {
     loaders: [

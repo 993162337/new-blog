@@ -9,7 +9,7 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true,
-      // __HOST__: JSON.stringify(""),
+      __HOST__: JSON.stringify(""),
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

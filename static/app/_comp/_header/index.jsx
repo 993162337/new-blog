@@ -32,7 +32,7 @@ export default React.createClass({
   },
 
   handleChange(index) {
-    $(this.refs.highLight).animate({left: 100 * index}, 300)
+    $(this.refs.highLight).animate({left: 100 * index}, 200)
     localStorage.setItem("left", index)
 
     this.setState({currentPage: index})

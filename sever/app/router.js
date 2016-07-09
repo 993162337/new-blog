@@ -1,11 +1,11 @@
-import { jsonWrite } from "./global/utils"
+import handler from "./handler"
 
 exports.construct = app => {
-  app.get("/", (req, res) => {
-    jsonWrite(res, {succ: "Hello world"})
+  app.get("/fetchAllArticle", (req, res) => {
+    handler.fetchAllArticle(req, res)
   })
 
-  app.get("/*", (req, res) => {
-    res.redirect("/")
+  app.get("/", (req, res) => {
+    res.redirect("/index.html")
   })
 }

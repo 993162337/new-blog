@@ -1,3 +1,3 @@
 import "./array"
 import "./string"
-import "./util"
+import "./utils"

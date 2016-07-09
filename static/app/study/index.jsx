@@ -1,138 +1,102 @@
 import "./style"
 import React from "react"
-import ReactDOM from "react-dom"
+import moment from "moment"
 import Tab from "../_comp/_tab"
+import { isEmpty } from "utils"
+
+const TabList = ["All", "New", "React", "CSS", "Note", "Bug"]
+let ArticalData = null
 
 export default React.createClass({
-  componentDidMount() {
-    this.updateData()
-    setTimeout('$(".study-content").ellipsis(350)', 10)
-  },
-
-  getDefaultProps() {
-    return {
-      url: "./study-data.json",
-      tabList: ["All", "New", "React", "CSS", "Note", "Bug"]
-    }
-  },
-
   getInitialState() {
     return {
-      new: null,
-      list: [],
+      list: null,
       index: 0,
-      artical: {
-        title: "",
-        content: "",
-        time: "",
-        mark: "",
-      }
+      tabIndex: 0,
     }
+  },
+
+  componentWillMount() {
+    this.updateData()
   },
 
   updateData() {
-    $.getJSON(this.props.url)
-      .done(d => {
-        this.setState({
-          list: d,
-          index: 0,
-        })
-       })
-      .fail(d => { console.log(d) })
+    $.get(__HOST__ + "/fetchAllArticle")
+      .then(d => ArticalData = d)
+      .then(this.constructData)
   },
 
-  tabChanged(text) {
-    $.getJSON(this.props.url)
-      .done(d => {
-        text = text == "All" ? "" : text
-        let newList = []
-        d.map(item => {
-          if(item.mark.indexOf(text) !== -1) newList.push(item)
-        })
+  constructData() {
+    let text = this.state.tabIndex ? TabList[this.state.tabIndex].toLowerCase() : ""
+    let result = []
 
-        this.setState({
-          list: newList
-        }, function() {
-          setTimeout('$(".study-content").ellipsis(350)', 5)
-        })
-       })
-      .fail((d, error) => { console.log(error.message) })
+    ArticalData.forEach(item => {
+      if(item.mark.has(text)) result.push(item)
+    })
+
+    this.setState({list: result})
   },
 
-  getContent(e) {
-    let id = $(e.target).closest("div").attr("id")
-    $.getJSON(this.props.url)
-      .done(d => {
-        d.map(item => {
-          if(item.id == id) {
-            this.setState({
-              artical: item,
-              index: 1,
-            })
-          }
-        })
-      })
+  renderList() {
+    if(isEmpty(this.state.list)) {
+      return <div className="study-no-data">
+        <i className="fa fa-smile-o" />
+        <span>
+          There is no article under this category!
+        </span>
+      </div>
+    }
+
+    return this.state.list.map(item => {
+      return <div className="study-item" id={ item.id } key={ item.id } >
+        <a>
+          { item.title }
+        </a>
+
+        <div className="study-tag">
+          <span>
+            <i className="fa fa-bookmark-o u-mr10" />
+            { item.mark }
+          </span>
+
+          <span className="u-ml20">
+            <i className="fa fa-calendar u-mr10" />
+            { moment(item.date_time).format("YYYY-MM-DD") }
+          </span>
+        </div>
+
+        <p className="study-content">{ item.content }</p>
+
+        <span className="study-more">
+          <i className="fa fa-angle-double-right u-mr5" />
+          more
+        </span>
+      </div>
+    })
   },
 
   pullBack() {
-    let newList = []
-    let node = ReactDOM.findDOMNode(this.refs.tabList)
-    let text = $(node).find(".active").text() == "All" ? "" : $(node).find(".active").text()
-    this.state.list.map(item => {
-      if(item.mark.indexOf(text) !== -1) newList.push(item)
-    })
-
-    this.setState({
-      list: newList,
-      index: 0
-    })
-    setTimeout('$(".study-content").ellipsis(350)', 5)
+    this.setState({ index: 0 })
   },
 
   render() {
-    let content = [
-      <ArticalList list={ this.state.list } getContentCB={ this.getContent } />,
-      <ArticalContent data={ this.state.artical } backCB={ this.pullBack } />
-    ]
+    if(this.state.index) {
+      return <ArticalContent data={ {} } backCB={ this.pullBack } />
+    }else {
+      return <div className="study-list">
+        <Tab
+          ref="tabList"
+          tabList={ TabList }
+          onChangeCB={ (index) => {
+            this.setState({tabIndex: index}, this.constructData)
+          } }
+        />
 
-    return (
-      <div className="study-list">
-        <Tab tabList={ this.props.tabList } onChangeCB={ this.tabChanged } ref="tabList" />
-        { content[this.state.index] }
-      </div>
-    )
-  }
-});
-
-const ArticalList = React.createClass({
-  render() {
-    let articalList = []
-
-    this.props.list.map((item, key) => {
-      return articalList.push(
-        <div className="study-item" id={ item.id } key={key} >
-          <a onClick={ this.props.getContentCB }>
-            { item.title }
-          </a>
-          <span className="study-tag">
-            <i className="fa fa-tag" />
-            { item.mark }
-          </span>
-          <span className="study-time">
-            <i className="fa fa-calendar" />
-            { item.time }
-          </span>
-          <p className="study-content">{ item.content }</p>
-          <span className="study-more" onClick={ this.props.getContentCB }>more&gt;&gt;</span>
+        <div className="artical-list">
+          { this.renderList() }
         </div>
-      )
-    })
-
-    return (
-      <div className="artical-list">
-        { articalList }
       </div>
-    )
+    }
   }
 })
 

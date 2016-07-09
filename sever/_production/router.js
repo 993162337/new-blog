@@ -1,1 +1,1 @@
-"use strict";var _utils=require("./global/utils");exports.construct=function(t){t.get("/user",function(t,s){s.json({succ:!0})})};
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}var _handler=require("./handler"),_handler2=_interopRequireDefault(_handler);exports.construct=function(e){e.get("/fetchAllArticle",function(e,t){_handler2["default"].fetchAllArticle(e,t)}),e.get("/",function(e,t){t.redirect("/index.html")})};

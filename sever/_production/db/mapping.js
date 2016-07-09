@@ -1,1 +1,1 @@
-"use strict";exports.wx={insertUser:"update award_user set name=?, address=?, mobile=? where openid=?",insertOpen:"insert into award_user(openid, award) values(?,?)",updateAward:"update award set number=number-1 where id=?",queryByOpenId:"select * from award_user where openid=?",queryAll:"select * from award_user"};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={getAllArticle:"select * from article"};

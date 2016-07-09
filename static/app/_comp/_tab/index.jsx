@@ -16,7 +16,7 @@ let Tab = React.createClass({
     $(root).find("li").removeClass("active")
     $(e.target).closest("li").addClass("active")
 
-    this.props.onChangeCB($(e.target).closest("li").text())
+    this.props.onChangeCB($(e.target).closest("li").index())
   },
 
   componentDidMount() {

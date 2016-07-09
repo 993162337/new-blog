@@ -1,1 +1,1 @@
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}var _sever=require("./sever"),_sever2=_interopRequireDefault(_sever),_router=require("./router"),_router2=_interopRequireDefault(_router),app=_sever2["default"].createServer();_router2["default"].construct(app);
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}var _sever=require("./sever"),_router=require("./router"),_router2=_interopRequireDefault(_router),app=(0,_sever.createServer)();_router2["default"].construct(app);

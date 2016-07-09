@@ -6,6 +6,7 @@ build-dev:
 
 build-pro:
 	@echo -e "\033[1;32m Build files for production\033[m"
+	babel app/ -d _dev/ -s
 	gulp compress
 
 run:
@@ -14,4 +15,6 @@ run:
 
 deploy:
 	@echo -e "\033[1;32m Build files for production\033[m"
-	rsync -r -l --progress --delete _production/ root@115.159.226.253:/home/woolson/blog
+	rm _production/package.json
+	cp package.json _production/package.json
+	rsync -r -l --progress --exclude="node_modules" --delete _production/ root@115.159.226.253:/home/woolson/blog
