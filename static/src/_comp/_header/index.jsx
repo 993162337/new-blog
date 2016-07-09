@@ -21,7 +21,7 @@ let HeaderTop = React.createClass({
     }
   },
 
-  handleChange(e) {
+  handleChange(name, e) {
     let node = ReactDOM.findDOMNode(this.refs.root)
     let newNavs = this.state.navs
 
@@ -35,7 +35,7 @@ let HeaderTop = React.createClass({
       navs: newNavs
     })
 
-    this.props.indexChange(selected)
+    this.props.indexChange(name)
   },
 
   renderNavs(){
@@ -43,7 +43,7 @@ let HeaderTop = React.createClass({
       let className = index == 2 ? "active" : ""
       return (
         <li key={index} data={ index } className={ className } >
-          <a href="javascript:;"  onClick={ this.handleChange }>{ name }</a>
+          <a href="javascript:;"  onClick={ this.handleChange.bind(null, name.toLowerCase()) }>{ name }</a>
         </li>
       )
     })
@@ -111,10 +111,10 @@ let AccountName = React.createClass({
     return (
       <span className="account-name">
         <div className="btn-group">
-          <button 
+          <button
             className="btn dropdown-toggle"
             type="button"
-            data-toggle="dropdown" 
+            data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
             { this.props.name }

@@ -1,0 +1,1 @@
+"use strict";module.exports={host:"bsmartdb.ccvmhzzhf3ic.ap-northeast-1.rds.amazonaws.com",user:"woolson",password:"993162337",database:"titan",port:3306};

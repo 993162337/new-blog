@@ -1,0 +1,1 @@
+{"version":3,"sources":["../app/app.js"],"names":[],"mappings":";;AAAA;;AACA;;;;;;AAEA,IAAM,MAAM,0BAAZ;;AAEA,iBAAO,SAAP,CAAiB,GAAjB","file":"app.js","sourcesContent":["import { createServer } from \"./sever\"\nimport router from \"./router\"\n\nconst app = createServer()\n\nrouter.construct(app)\n"]}

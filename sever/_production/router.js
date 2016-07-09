@@ -1,0 +1,1 @@
+"use strict";var _utils=require("./global/utils");exports.construct=function(t){t.get("/user",function(t,s){s.json({succ:!0})})};

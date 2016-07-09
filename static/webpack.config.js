@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "./dev"),
     filename: "bundle.min.js",
-    chunkFilename: "[id].[chunkhash].chunk.js",
+    chunkFilename: "[name].[chunkhash].js",
   },
   devServer: {
     contentBase: path.join(__dirname, "./dev"),
@@ -28,6 +28,11 @@ module.exports = {
       __DEV__: true,
       // __HOST__: JSON.stringify(""),
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ],
   resolve: {
     root: [

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 
 let Home = React.createClass({
   componentDidMount() {
-     
+
   },
 
   getDefaultProps() {
@@ -20,7 +20,7 @@ let Home = React.createClass({
   render() {
     return (
       <div>
-        logo
+        haha
       </div>
     )
   }
