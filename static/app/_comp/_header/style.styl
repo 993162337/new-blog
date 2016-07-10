@@ -3,6 +3,7 @@
 ._header
   background-color $background-gray
   border-bottom 1px solid $border-gray
+  position relative
   .navs
     width 500px
     display flex
@@ -23,3 +24,22 @@
         bottom 0
         border-bottom: 5px solid $main-blue
         box-sizing border-box
+  ._header-user
+    display: inline-flex
+    position absolute
+    display flex
+    align-items center
+    height 65px
+    overflow hidden
+    top 0
+    right 50px
+    font-size 14px
+    color darken($main-blue, 20%)
+    img
+      margin-left: 15px
+      width: 40px
+      height: 40px
+      border-radius: 100%
+      border: 2px solid white
+    span
+      cursor pointer

@@ -20,3 +20,12 @@ export function isEmpty(obj) {
     return obj == ""
   }
 }
+
+export function urlWithParams(url, obj) {
+  let keys = Object.keys(obj)
+  keys.forEach((key, index) => {
+    url += `${index ? "&" : "?"}${key}=${obj[key]}`
+  })
+
+  return url
+}

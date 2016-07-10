@@ -1,6 +1,7 @@
 import "./style"
 import React from "react"
 import cx from "classnames"
+import { urlWithParams } from "utils"
 
 const Navs = [
   {text: "HOME", value: 0},
@@ -14,6 +15,10 @@ export default React.createClass({
   getInitialState() {
     return {
       currentPage: this.getActivePosition(),
+      // signed: {
+      //   name: "woolson",
+      //   url: require("../../assets/images/logo.png")
+      // }
     }
   },
 
@@ -49,6 +54,17 @@ export default React.createClass({
       </li>)
   },
 
+  login() {
+    let url = "https://api.weibo.com/oauth2/authorize"
+    let params = {
+      client_id: "529782172",
+      response_type: "code",
+      redirect_uri: "http://www.fingertip.tech/index.html"
+    }
+
+    window.location.href = urlWithParams(url, params)
+  },
+
   render() {
     return <div className="_header">
       <ul ref="root" className="navs">
@@ -56,6 +72,19 @@ export default React.createClass({
 
         <li ref="highLight" />
       </ul>
+
+      {
+        this.state.signed
+          ? <div className="_header-user">
+              <span>{ this.state.signed.name }</span>
+              <img src={ this.state.signed.url } />
+            </div>
+          : <div className="_header-user">
+              <span onClick={ this.login }>
+                <i className="fa fa-sign-in u-mr5" />登录
+              </span>
+            </div>
+      }
     </div>
   }
 })
