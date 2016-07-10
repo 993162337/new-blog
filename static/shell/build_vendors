@@ -3,23 +3,21 @@ set -eu
 
 vendors_js="
   jquery
-  bootstrap
-  ellipsis
   moment
+  react
+  react-dom
+  react-router
 "
 
 vendors_css="
-  bootstrap
-  bootstrap.theme
-  ellipsis
   fontawesome
 "
 
 function build_vendors() {
   local file_type=$1
   local vendors=$2
-
-  cd dev/assets/$file_type
+  pwd
+  cd assets/$file_type
 
   files=""
   for name in $vendors; do
@@ -36,8 +34,8 @@ function build_vendors() {
   fi
 
   rm -f ../dev/vendors.min.$file_type
-  cp -f vendors.min.$file_type ../../../dev/
-  cd ../../../
+  mv -f vendors.min.$file_type ../../dev/
+  cd ../../
 }
 
 build_vendors js "$vendors_js"

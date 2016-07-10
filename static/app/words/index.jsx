@@ -1,6 +1,5 @@
 import "./style"
 import React from "react"
-import ReactDOM from "react-dom"
 import moment from "./../../node_modules/moment"
 
 let dataBase
@@ -13,24 +12,21 @@ let Message = React.createClass({
   },
 
   submiteAll() {
-    let getName = ReactDOM.findDOMNode(this.refs.name).value
-    let getMessage = ReactDOM.findDOMNode(this.refs.message).value
+    let getMessage = this.refs.message.value
     let getTime = moment().format("YYYY年MM月DD日HH点mm分ss秒")
 
-    if(getName == "" || getMessage == "") return
+    if(getMessage == "") return
 
-    ReactDOM.findDOMNode(this.refs.name).value = ""
-    ReactDOM.findDOMNode(this.refs.message).value = ""
+    this.refs.message.value = ""
 
     let node = {}
     node = {
-      name: getName,
       message: getMessage,
       time: getTime,
     }
 
     dataBase.transaction(tx => {
-      tx.executeSql("INSERT INTO MessageList VALUES(?,?,?)", [getName, getMessage, getTime], (tx, ts) => {
+      tx.executeSql("INSERT INTO MessageList VALUES(?,?,?)", ["woolson", getMessage, getTime], (tx, ts) => {
         this.renderData()
       }, (tx, error) => {
         alert(error.source + "::" + error.message)
@@ -58,13 +54,12 @@ let Message = React.createClass({
 
   componentDidMount() {
     this.renderData()
-    // console.log(this)
   },
 
   respone(e) {
     let responeName = $(e.target).closest("li").text()
-    ReactDOM.findDOMNode(this.refs.message).value = "@" + responeName + "："
-    ReactDOM.findDOMNode(this.refs.message).focus()
+    this.refs.message.value = "@" + responeName + "："
+    this.refs.message.focus()
 
   },
 
@@ -94,7 +89,10 @@ let Message = React.createClass({
                 {item.name}
               </li>
               <li>{item.message}</li>
-              <li>{item.time}</li>
+              <li>
+                <i className="fa fa-calendar u-mr5" />
+                {item.time}
+              </li>
             </ul>
           </div>
         </div>
@@ -104,18 +102,12 @@ let Message = React.createClass({
     return (
       <div className="message">
         <div className="send">
-          <label htmlFor="name">HideID</label>
-          <input className="form-control"
-            id="name"
-            ref="name"
-            type="text"
-            placeholder="name" />
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">Express your ideas !</label>
           <textarea
             type="text"
             id="message"
             ref="message"
-            placeholder="message"
+            placeholder="Say something …"
             className="form-control"
           />
           <div className="button-group">
@@ -125,7 +117,7 @@ let Message = React.createClass({
               className="btn btn-default"
               onClick={ this.submiteAll }
             >
-              T
+              <i className="fa fa-paper-plane" />
             </a>
           </div>
         </div>

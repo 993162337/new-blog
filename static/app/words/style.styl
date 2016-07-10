@@ -1,3 +1,5 @@
+@require "../../style/global"
+
 .message
   width: 100%
   overflow: auto
@@ -22,38 +24,53 @@
       span
         display: inline-block
         width: 100px
-    input
-      display: inline-block
-      width: 350px
     textarea
-      display: inline
       width: 350px
+      padding: 0 10px
+      box-sizing: border-box
+      margin-top: 10px
+      outline: none
+      padding: 10px
+      border: 1px solid $border-gray
+      display: inline
       height: 100px
       vertical-align: top
-      resize:none;
+      resize: none
+      border-radius 5px
+      &:focus
+        border-color:$main-green
     a
+      display: inline-block
       width: 50px
       height: 50px
-      line-height: 36px
+      line-height: 50px
       border-radius: 100%
       margin: 20px 0 0 0
       font-weight: bolder
-      font-size: 17px
-      color: $font-color
+      font-size: 20px
+      color: $main-green
+      text-align: center
+      border: 1px solid $border-gray
       background-image: none
+      padding-right: 3px
+      box-sizing: border-box
+      &:active
+        background: $main-green
+        color: white
     #message
       height: 70px
 
   .message-list
     width: 100%
     margin: 0 auto
-    & div:nth-last-child(1)
+    > div:nth-last-child(1)
       margin-bottom: 0 !important
+      background: url("/assets/images/time-line-half.png") #f5f5f5 center center no-repeat
     .node-left
       text-align: right;
       padding: 15px 0 15px 0;
       padding-right: 51.5%
-      background: url("../../dev/assets/images/time-line.png") #f5f5f5 center center no-repeat
+      background: url("/assets/images/time-line.png") #f5f5f5 center center no-repeat
       .node-item
         .arrow
           border-left: 10px solid white
@@ -74,7 +91,7 @@
     .node-right
       text-align: left;
       padding-left: 51.5%;
-      background: url("../../dev/assets/images/time-line.png") #f5f5f5 center center no-repeat
+      background: url("/assets/images/time-line.png") #f5f5f5 center center no-repeat
       .node-item
         .arrow
           border-right: 10px solid white
@@ -91,7 +108,7 @@
               position: absolute
               margin-left: -10px
     .node-left, .node-right
-      margin-bottom: -37px
+      margin-bottom: -15px
       .node-item
         background-color: #fff
         border: 1px solid rgba(0,0,0,0.2)
@@ -134,7 +151,6 @@
             color: #888
             font-size: 12px
             padding-left: 14px
-            background: url("../../dev/assets/images/date.png") left center no-repeat
             background-size: 10px
             line-height: 12px;
             display: inline;

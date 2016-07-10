@@ -4,7 +4,8 @@ var path = require("path")
 module.exports = {
   entry: {
     app: path.join(__dirname, "./app/app.jsx"),
-    init: "./global/init.js"
+    init: "./global/init.js",
+    vendors: ["react", "react-dom", "moment", "react-router"]
   },
   output: {
     path: path.join(__dirname, "./dev"),

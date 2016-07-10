@@ -10,7 +10,10 @@ build-app:
 	webpack-dev-server --config webpack.config.js --hot --inline --progress
 
 build-compress:
+	@echo -e "\033[1;32m Building production ... !\033[m"
 	webpack --config webpack.production.config.js --colors --progress
+	rm dev/vendors.js
+	@echo -e "\033[1;32m Build production successful !\033[m"
 
 deploy-web:
 	# cp -rf dev/ ../sever/templates
