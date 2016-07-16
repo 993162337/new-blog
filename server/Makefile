@@ -9,8 +9,8 @@ build-pro:
 	babel app/ -d _dev/ -s
 	gulp compress
 
-run:
-	@echo -e "\033[1;32m Run server at http://localhost:3000\033[m"
+build-app:
+	@echo -e "\033[1;32m Run server at http://localhost:8081\033[m"
 	node _dev/app.js
 
 deploy:

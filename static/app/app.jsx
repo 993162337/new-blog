@@ -2,14 +2,7 @@ import "./app.styl"
 import React from "react"
 import { render } from "react-dom"
 import { Router, Route, IndexRoute, Redirect, hashHistory, withRouter } from "react-router"
-import Header from "./_comp/_header"
-
-import Home from "./home"
-import Study from "./study"
-import Life from "./life"
-import Words from "./words"
-import About from "./about"
-import Page from "./page"
+import Header from "./_common/_header"
 
 const App = withRouter(
   React.createClass({
@@ -31,14 +24,35 @@ const App = withRouter(
   })
 )
 
-render(
-  <Router history={ hashHistory } >
+const RootRounter = <Router history={ hashHistory }>
+    <Redirect from="/" to="/home" />
     <Route path="/" component={ App }>
-      <IndexRoute component={ Home } />
-      <Route path="home" component={ Home } />
-      <Route path="study" component={ Study } />
-      <Route path="life" component={ Life } />
-      <Route path="words" component={ Words } />
-      <Route path="about" component={ About } />
+        <Route path="home" getComponent={ (location, callback) => {
+            require.ensure([], (require) => {
+              callback(null, require("./home").default)
+            })
+        } }/>
+        <Route path="study" getComponent={ (location, callback) => {
+              require.ensure([], (require) => {
+                callback(null, require("./study").default)
+              })
+          } }/>
+        <Route path="life" getComponent={ (location, callback) => {
+              require.ensure([], (require) => {
+                callback(null, require("./life").default)
+              })
+          } }/>
+        <Route path="words" getComponent={ (location, callback) => {
+              require.ensure([], (require) => {
+                callback(null, require("./words").default)
+              })
+          } }/>
+        <Route path="about" getComponent={ (location, callback) => {
+              require.ensure([], (require) => {
+                callback(null, require("./about").default)
+              })
+          } }/>
     </Route>
-  </Router>, document.getElementById('container'))
+</Router>
+
+render(RootRounter, document.getElementById('container'))

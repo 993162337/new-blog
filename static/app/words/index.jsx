@@ -1,83 +1,52 @@
 import "./style"
 import React from "react"
-import moment from "./../../node_modules/moment"
+import md5 from "md5"
+import moment from "moment"
 
-let dataBase
-
-let Message = React.createClass({
+export default React.createClass({
   getInitialState() {
     return {
       messageList: []
     }
   },
 
-  submiteAll() {
-    let getMessage = this.refs.message.value
-    let getTime = moment().format("YYYY年MM月DD日HH点mm分ss秒")
+  componentDidMount() {
+    this.fetchData()
+  },
 
-    if(getMessage == "") return
+  fetchData() {
+    $.getJSON(__HOST__ + "/fetchAllMessage")
+      .then(d => this.setState({messageList: d}))
+  },
 
-    this.refs.message.value = ""
-
-    let node = {}
-    node = {
-      message: getMessage,
-      time: getTime,
+  submite() {
+    let params = {
+      name: "test",
+      content: this.refs.message.value,
+      response: null
     }
 
-    dataBase.transaction(tx => {
-      tx.executeSql("INSERT INTO MessageList VALUES(?,?,?)", ["woolson", getMessage, getTime], (tx, ts) => {
-        this.renderData()
-      }, (tx, error) => {
-        alert(error.source + "::" + error.message)
+    $.post(__HOST__ + "/insertMessage", params)
+      .then(d => {
+        if(d.succ) this.fetchData()
       })
-    })
-  },
-
-  renderData() {
-    let list = []
-    dataBase = openDatabase("message", "1.0", "messageBoard", 1024 * 1024)
-
-    dataBase.transaction(tx => {
-      tx.executeSql("CREATE TABLE IF NOT EXISTS MessageList(name TEXT, message TEXT, time TEXT)", [])
-      tx.executeSql("SELECT * FROM MessageList", [], (tx, rs) => {
-        for(var i = 0; i < rs.rows.length; i++){
-          list.push(rs.rows.item(i))
-        }
-        this.setState({
-          messageList: list
-        })
-      })
-    })
-  },
-
-
-  componentDidMount() {
-    this.renderData()
   },
 
   respone(e) {
     let responeName = $(e.target).closest("li").text()
     this.refs.message.value = "@" + responeName + "："
     this.refs.message.focus()
-
   },
 
-  render() {
-    let messageNode = []
-    let className1
+  renderList() {
+    let result = []
 
-    this.state.messageList.map((item, key) => {
-      if(key % 2 == 0){
-        className1 = "node-left"
-      }else{
-        className1 = "node-right"
-      }
+    this.state.messageList.map((item, index) => {
+      let nameColor = md5(item.name).substring(0, 7)
+      let klass = index % 2 == 0 ? "node-left" : "node-right"
 
-      let nameColor = (Math.random()*5 + "").substring(2, 8)
-
-      return messageNode.unshift(
-        <div className={className1} key={key}>
+      result.unshift(
+        <div className={ klass } key={ index }>
           <div className="node-item">
             <div className="arrow"></div>
             <ul>
@@ -88,10 +57,10 @@ let Message = React.createClass({
               >
                 {item.name}
               </li>
-              <li>{item.message}</li>
+              <li>{item.content}</li>
               <li>
                 <i className="fa fa-calendar u-mr5" />
-                {item.time}
+                { moment(item.date_time).format("YYYY-MM-DD") }
               </li>
             </ul>
           </div>
@@ -99,34 +68,35 @@ let Message = React.createClass({
       )
     })
 
-    return (
-      <div className="message">
-        <div className="send">
-          <label htmlFor="message">Express your ideas !</label>
-          <textarea
-            type="text"
-            id="message"
-            ref="message"
-            placeholder="Say something …"
-            className="form-control"
-          />
-          <div className="button-group">
-            <a
-              role="button"
-              href="javascript:;"
-              className="btn btn-default"
-              onClick={ this.submiteAll }
-            >
-              <i className="fa fa-paper-plane" />
-            </a>
-          </div>
-        </div>
-        <div className="message-list">
-          { messageNode }
+    return result
+  },
+
+  render() {
+    return <div className="message">
+      <div className="send">
+        <label htmlFor="message">Express your ideas !</label>
+        <textarea
+          type="text"
+          id="message"
+          ref="message"
+          placeholder="Say something …"
+          className="form-control"
+        />
+        <div className="button-group">
+          <a
+            role="button"
+            href="javascript:;"
+            className="btn btn-default"
+            onClick={ this.submite }
+          >
+            <i className="fa fa-paper-plane" />
+          </a>
         </div>
       </div>
-    )
+
+      <div className="message-list">
+        { this.renderList() }
+      </div>
+    </div>
   }
 });
-
-export default Message

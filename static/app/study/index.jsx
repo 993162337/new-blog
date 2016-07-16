@@ -1,7 +1,8 @@
 import "./style"
 import React from "react"
 import moment from "moment"
-import Tab from "../_comp/_tab"
+import Tab from "_tab"
+import Empty from "_empty"
 import { isEmpty } from "utils"
 
 const TabList = ["All", "New", "React", "CSS", "Note", "Bug"]
@@ -39,12 +40,7 @@ export default React.createClass({
 
   renderList() {
     if(isEmpty(this.state.list)) {
-      return <div className="study-no-data">
-        <i className="fa fa-smile-o" />
-        <span>
-          There is no article under this category!
-        </span>
-      </div>
+      return <Empty />
     }
 
     return this.state.list.map(item => {

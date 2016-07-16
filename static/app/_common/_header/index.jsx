@@ -55,11 +55,11 @@ export default React.createClass({
   },
 
   login() {
-    let url = "https://api.weibo.com/oauth2/authorize"
+    let url = "https://graph.qq.com/oauth2.0/authorize"
     let params = {
-      client_id: "529782172",
+      client_id: "1105474407",
       response_type: "code",
-      redirect_uri: "http://www.fingertip.tech/index.html"
+      redirect_uri: "http://www.woolson.cn/index.html"
     }
 
     window.location.href = urlWithParams(url, params)
