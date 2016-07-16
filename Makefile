@@ -7,7 +7,7 @@ deploy-production:
 
 define rsyncSever
 	echo -e "\033[1;32m Rsync server side \033[m"
-	cd sever && make build-pro && make deploy
+	cd server && make build-compress && make deploy
 endef
 
 define rsyncWeb
