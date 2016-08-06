@@ -32,7 +32,7 @@ export default React.createClass({
     let result = []
 
     ArticalData.forEach(item => {
-      if(item.mark.has(text)) result.push(item)
+      if(item.tags.has(text)) result.push(item)
     })
 
     this.setState({list: result})
@@ -52,12 +52,12 @@ export default React.createClass({
         <div className="study-tag">
           <span>
             <i className="fa fa-bookmark-o u-mr10" />
-            { item.mark }
+            { item.tags }
           </span>
 
           <span className="u-ml20">
             <i className="fa fa-calendar u-mr10" />
-            { moment(item.date_time).format("YYYY-MM-DD") }
+            { moment(item.createTime).format("YYYY-MM-DD") }
           </span>
         </div>
 
@@ -77,7 +77,7 @@ export default React.createClass({
 
   render() {
     if(this.state.index) {
-      return <ArticalContent data={ {} } backCB={ this.pullBack } />
+      return <ArticalContent backCB={ this.pullBack } />
     }else {
       return <div className="study-list">
         <Tab

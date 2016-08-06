@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={host:"bsmartdb.ccvmhzzhf3ic.ap-northeast-1.rds.amazonaws.com",user:"woolson",password:"993162337",database:"titan",port:3306};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={host:"zero.caagwjsrjxla.ap-northeast-1.rds.amazonaws.com",user:"zhanglingfe",password:"19911010",database:"zero",port:3306};

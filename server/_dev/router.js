@@ -26,5 +26,10 @@ exports.construct = function (app) {
     app.get("/login", function (req, res) {
         _handler2.default.fetchUserInfo(req, res);
     });
-};
+}; /*
+   * @Author: wuzeng
+   * @Date:   2016-07-17 01:05:19
+   * @Last Modified by:   wuzeng
+   * @Last Modified time: 2016-08-05 23:32:08
+   */
 //# sourceMappingURL=router.js.map

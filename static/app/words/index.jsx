@@ -42,7 +42,7 @@ export default React.createClass({
     let result = []
 
     this.state.messageList.map((item, index) => {
-      let nameColor = md5(item.name).substring(0, 7)
+      let nameColor = md5(item.author).substring(0, 7)
       let klass = index % 2 == 0 ? "node-left" : "node-right"
 
       result.unshift(
@@ -55,12 +55,12 @@ export default React.createClass({
                 onClick={ this.respone }
                 title="click to respone him or her"
               >
-                {item.name}
+                {item.author}
               </li>
               <li>{item.content}</li>
               <li>
                 <i className="fa fa-calendar u-mr5" />
-                { moment(item.date_time).format("YYYY-MM-DD") }
+                { moment(item.createTime).format("YYYY-MM-DD") }
               </li>
             </ul>
           </div>

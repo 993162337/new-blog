@@ -14,6 +14,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     getAllArticle: "select * from article",
     getAllMessage: "select * from message",
-    insertMessage: "insert into message(name, content, response) values(?, ?, ?)"
+    insertMessage: "insert into message(author, content, response) values(?, ?, ?)"
 };
 //# sourceMappingURL=mapping.js.map
