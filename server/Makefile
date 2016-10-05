@@ -6,6 +6,7 @@ build-dev:
 
 build-app:
 	@echo -e "\033[1;32m Run server at http://localhost:8081\033[m"
+	babel app/ -d _dev/ -s
 	node _dev/app.js
 
 build-compress:

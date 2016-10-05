@@ -1,7 +1,7 @@
 import mysql from "mysql"
-import Map from "./db/mapping"
-import Conf from "./db/config"
-import { jsonWrite } from "./global/utils"
+import Map from "../db/mapping"
+import Conf from "../db/config"
+import { jsonWrite } from "../global/utils"
 
 const pool = mysql.createPool(Conf)
 

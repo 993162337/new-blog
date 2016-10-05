@@ -1,6 +1,6 @@
-import { createServer } from "./sever"
-import router from "./router"
+import createServer from "./sever"
+import router from "./router/router"
 
 const app = createServer()
 
-router.construct(app)
+router(app)

@@ -3,7 +3,7 @@ import bodyParser from "body-parser"
 
 const app = express()
 
-export const createServer = () => {
+export default () => {
   app.use(bodyParser.urlencoded({extended: false}))
   app.use(bodyParser.json())
 

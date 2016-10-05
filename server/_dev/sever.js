@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createServer = undefined;
 
 var _express = require("express");
 
@@ -17,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
-var createServer = exports.createServer = function createServer() {
+exports.default = function () {
   app.use(_bodyParser2.default.urlencoded({ extended: false }));
   app.use(_bodyParser2.default.json());
 

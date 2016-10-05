@@ -10,20 +10,11 @@ let Tab = React.createClass({
     }
   },
 
-  onChange(e) {
-
-    let root  = ReactDOM.findDOMNode(this.refs.filter)
-    $(root).find("li").removeClass("active")
+  onChange(index, e) {
+    $(this.refs.filter).find("li").removeClass("active")
     $(e.target).closest("li").addClass("active")
 
-    this.props.onChangeCB($(e.target).closest("li").index())
-  },
-
-  componentDidMount() {
-    let currentHeight = $(window).height() - 148
-
-    let Content = ReactDOM.findDOMNode(this.refs._tab)
-    $(Content).css("minHeight", currentHeight + "px")
+    this.props.onChangeCB(index)
   },
 
   render() {
@@ -33,7 +24,13 @@ let Tab = React.createClass({
     this.props.tabList.map((item, key) => {
       className = key == this.state.index ? "active" : ""
       return tabList.push(
-        <li key={key} className={ className } onClick={ this.onChange }>{ item }</li>
+        <li
+          key={ key }
+          className={ className }
+          onClick={ this.onChange.bind(null, key) }
+        >
+          { item }
+        </li>
       )
     })
 

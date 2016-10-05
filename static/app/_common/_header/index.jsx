@@ -1,7 +1,7 @@
 import "./style"
 import React from "react"
 import cx from "classnames"
-import { urlWithParams } from "utils"
+import { urlWithParams, getStorage, deParams, isEmpty } from "utils"
 
 const Navs = [
   {text: "HOME", value: 0},
@@ -13,18 +13,63 @@ const Navs = [
 
 export default React.createClass({
   getInitialState() {
+    let user = getStorage("user")
     return {
       currentPage: this.getActivePosition(),
-      // signed: {
-      //   name: "woolson",
-      //   url: require("../../assets/images/logo.png")
-      // }
+      signed: user.get(),
     }
+  },
+
+  componentWillMount() {
+    this.getCodeToken()
+    this.getOpenId()
   },
 
   componentDidMount() {
     let index = this.getActivePosition()
     $(this.refs.highLight).css({left: 100 * index})
+  },
+
+  getCodeToken() {
+    const params = deParams(location.href)
+
+    if(isEmpty(params)) return
+
+    const url = "https://graph.qq.com/oauth2.0/token"
+    const param = {
+      grant_type: "authorization_code",
+      client_id: "1105474407",
+      client_secret: "YXivByI9oor9uGFw",
+      code: params.code,
+      redirect_uri: "http://www.woolson.cn/index.html",
+    }
+
+    window.location.href = urlWithParams(url, param)
+  },
+
+  getOpenId() {
+    const params = deParams(location.href)
+
+    if(isEmpty(params)) return
+
+    const url = "https://graph.qq.com/oauth2.0/me"
+    const param = {
+      access_token: params.access_token,
+    }
+
+    $.getJSON(url, param)
+      .then(d => console.log(d))
+  },
+
+  login() {
+    let url = "https://graph.qq.com/oauth2.0/authorize"
+    let params = {
+      client_id: "101336260",
+      response_type: "code",
+      redirect_uri: "http://www.woolson.cn/index.html"
+    }
+
+    window.location.href = urlWithParams(url, params)
   },
 
   getActivePosition() {
@@ -54,17 +99,6 @@ export default React.createClass({
       </li>)
   },
 
-  login() {
-    let url = "https://graph.qq.com/oauth2.0/authorize"
-    let params = {
-      client_id: "101336260",
-      response_type: "code",
-      redirect_uri: "http://www.woolson.cn/index.html"
-    }
-
-    window.location.href = urlWithParams(url, params)
-  },
-
   render() {
     return <div className="_header">
       <ul ref="root" className="navs">
@@ -79,9 +113,10 @@ export default React.createClass({
               <span>{ this.state.signed.name }</span>
               <img src={ this.state.signed.url } />
             </div>
-          : <div className="_header-user">
+          : <div className="_header-login">
               <span onClick={ this.login }>
-                <i className="fa fa-sign-in u-mr5" />登录
+                <img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_1.png" alt=""/>
+                QQ登录
               </span>
             </div>
       }
