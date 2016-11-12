@@ -19,8 +19,8 @@ let Home = React.createClass({
 
   render() {
     return (
-      <div>
-        haha
+      <div className="home-page">
+        <img src={ require("../assets/images/bg2.jpg") } alt=""/>
       </div>
     )
   }

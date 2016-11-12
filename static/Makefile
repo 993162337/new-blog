@@ -1,21 +1,31 @@
+# @Author: woolson
+# @Date:   2016-11-10 10:11:00
+# @Email:  woolson.lee@gmail.com
+# @Last modified by:   woolson
+# @Last modified time: 2016-11-12 23:11:94
+
 SHELL := /bin/bash
 
 assets = "assets/vendor/"
 dist = "dist/"
 
 build-vendors:
+	rm _dev/vendors* _production/vendors*
 	./shell/build_vendors
+	node shell/hash-vendors.js
+	@echo -e "\033[1;32m Complete build vendors ... !\033[m"
 
 build-app:
 	webpack-dev-server --config webpack.config.js --hot --inline --progress
 
-build-compress:
+build-app-compress:
 	@echo -e "\033[1;32m Building production ... !\033[m"
-	webpack --config webpack.production.config.js --colors --progress
-	rm dev/vendors.js
+	rm -rf `ls _production/*.*.css _production/*.*.js|egrep -v 'vendors*'`
+	touch AllStyle.styl
+	NODE_ENV=production webpack --config webpack.production.config.js --colors --progress
 	@echo -e "\033[1;32m Build production successful !\033[m"
 
 deploy-web:
 	# cp -rf dev/ ../sever/templates
 	@echo -e "\033[1;32m Syncing files to static resource of server\033[m"
-	rsync -r -l --progress --delete dev/ root@115.159.226.253:/home/woolson/static
+	rsync -r -l --progress --delete _production/ root@123.206.220.242:/home/woolson/static

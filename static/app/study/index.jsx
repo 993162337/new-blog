@@ -38,16 +38,23 @@ export default React.createClass({
     this.setState({list: result})
   },
 
+  redirect(page) {
+    location.href = page
+  },
+
   renderList() {
     if(isEmpty(this.state.list)) {
       return <Empty />
     }
 
     return this.state.list.map(item => {
-      return <div className="study-item" id={ item.id } key={ item.id } >
-        <a>
-          { item.title }
-        </a>
+      return <div
+        id={ item.id }
+        key={ item.id }
+        className="study-item"
+        onClick={ this.redirect.bind(null, "./html/2016111001.html") }
+      >
+        <a>{ item.title }</a>
 
         <div className="study-tag">
           <span>
@@ -72,7 +79,7 @@ export default React.createClass({
   },
 
   pullBack() {
-    this.setState({ index: 0 })
+      this.setState({ index: 0 })
   },
 
   render() {
@@ -93,18 +100,16 @@ export default React.createClass({
         </div>
       </div>
     }
-  }
+  },
 })
 
 const ArticalContent = React.createClass({
   render() {
-    return (
-      <div className="artical">
-        <h2>{ this.props.data.title }</h2>
-        <p className="artical-date">{ this.props.data.time }</p>
-        <p className="artical-content">{ this.props.data.content }</p>
-        <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;-</a></p>
-      </div>
-    )
-  }
+    return <div className="artical">
+      <h2>{ this.props.data.title }</h2>
+      <p className="artical-date">{ this.props.data.time }</p>
+      <p className="artical-content">{ this.props.data.content }</p>
+      <p className="button"><a className="btn btn-default" type="button" onClick={ this.props.backCB } >&lt;-</a></p>
+    </div>
+  },
 })
