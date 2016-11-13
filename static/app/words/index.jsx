@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 21:11:32
+* @Last modified time: 2016-11-13 22:11:55
 */
 
 import "./style"
@@ -42,9 +42,10 @@ export default React.createClass({
 
   updatePading() {
     const $list = $(this.refs.list)
-    const scroll = $list[0].offsetWidth - $list[0].scrollWidth
-
-    $list.css("padding-left", scroll)
+    if($list) {
+      const scroll = $list[0].offsetWidth - $list[0].scrollWidth
+      $list.css("padding-left", scroll)
+    }
   },
 
   fetchData() {

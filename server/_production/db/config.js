@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]={host:"zero.caagwjsrjxla.ap-northeast-1.rds.amazonaws.com",user:"zhanglingfe",password:"19911010",database:"zero",port:3306};
+"use strict";module.exports={uri:"mongodb://woolson:woolson@www.woolson.cn:27017/blog"};
