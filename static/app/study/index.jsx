@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 21:11:46
+* @Last modified time: 2016-11-13 21:11:94
 */
 
 import "./style"
@@ -16,7 +16,7 @@ import { isEmpty } from "utils"
 const TabList = [
   "All",
   "New",
-  "React",
+  "JS",
   "CSS",
   "Note",
   "Bug",
@@ -43,17 +43,16 @@ export default React.createClass({
 
   filterList() {
     if(!this.state.list) return []
+
     let text = this.state.tabIndex
       ? TabList[this.state.tabIndex].toLowerCase()
       : ""
-    let result = []
 
-    this.state.list.forEach(item => {
-        if (item.tags.has(text))
-          result.push(item)
-      })
-
-    return result
+    if(this.state.tabIndex == 1) {
+      return this.state.list.filter(item => moment().diff(moment(item.date), "days") < 3)
+    }else {
+      return this.state.list.filter(item => item.tags.has(text))
+    }
   },
 
   redirect(page) {
@@ -62,31 +61,33 @@ export default React.createClass({
 
   renderList() {
     return this.filterList().map(item => {
-        return <div id={item.id}
-          key={item.id}
-          className="study-item"
-          onClick={ this.redirect.bind(null, item.html || "./html/2016111001.html") }
-        >
-      <a>{item.title}</a>
+      return <div id={item.id}
+        key={item.id}
+        className="study-item"
+        onClick={ this.redirect.bind(null, item.html || "./html/2016111001.html") }
+      >
+        <a>{item.title}</a>
 
-      <div className="study-tag">
-        <span>
-          <i className="fa fa-bookmark-o u-mr10"/> {item.tags}
-        </span>
+        <div className="study-tag">
+          <span>
+            <i className="fa fa-bookmark-o u-mr5"/>
+            { item.tags }
+          </span>
 
-        <span className="u-ml20">
-          <i className="fa fa-calendar u-mr10"/> {moment(item.createTime).format("YYYY-MM-DD")}
+          <span className="u-ml20">
+            <i className="fa fa-calendar u-mr5"/>
+            { item.date }
+          </span>
+        </div>
+
+        <p className="study-content">{item.content}</p>
+
+        <span className="study-more">
+          <i className="fa fa-angle-double-right u-mr5"/>
+          more
         </span>
       </div>
-
-      <p className="study-content">{item.content}</p>
-
-      <span className="study-more">
-        <i className="fa fa-angle-double-right u-mr5"/>
-        more
-      </span>
-    </div>
-      })
+    })
   },
 
   pullBack() {

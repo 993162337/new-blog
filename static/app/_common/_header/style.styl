@@ -1,4 +1,4 @@
-@require "../../../style/global"
+@require "global"
 
 ._header
   background-color $background-gray
@@ -24,28 +24,16 @@
         bottom 0
         border-bottom: 5px solid $main-blue
         box-sizing border-box
-  ._header-user
-    display: inline-flex
-    position absolute
-    display flex
-    align-items center
-    height 65px
-    overflow hidden
-    top 0
-    right 50px
-    font-size 14px
-    color darken($main-blue, 20%)
-    img
-      margin-left 5px
-      border-radius 100%
-      border 2px solid white
-      width 35px
-  ._header-login
-    position: absolute
-    right: 10%
-    top: 50%
-    margin-top: -5px
-    span
-      display flex
-      cursor pointer
-      align-items flex-end 
+
+._header-contact
+  position: absolute
+  right: 10px
+  top: 50%
+  margin-top: -9px
+  cursor: pointer
+  font-size: 1.5em
+  i
+    color: #333
+    cursor: pointer
+    &:hover
+      text-shadow: 0 0 4px #FFF

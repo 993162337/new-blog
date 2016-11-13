@@ -9,10 +9,22 @@
   ._block-empty
     flex: 1
     width: 100%
-    padding: 10px 0 30px 0
+    padding: 10px 0 0 0
     height: auto
     align-items: flex-end
     justify-content: flex-end
+    position: relative
+    &:after
+      content: " "
+      position: absolute
+      height: 35px
+      width: 100%
+      bottom: 0
+      left: 0
+      background: linear-gradient(to top, $background-gray, rgba(0, 0, 0, 0))
+  ._loading-block
+    height: auto
+    flex: 1
   .send
     display: flex
     flex-direction: column
@@ -68,8 +80,10 @@
   .message-list
     height: 100%
     width: 100%
-    overflow-y: auto
+    overflow-y: scroll
     color: white
+    padding: 30px 0
+    box-sizing: border-box
     .node-item
       box-sizing: border-box
       .node-item__content
