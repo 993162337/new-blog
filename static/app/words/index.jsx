@@ -1,12 +1,34 @@
+/**
+* @Author: woolson
+* @Date:   2016-06-16 16:06:00
+* @Email:  woolson.lee@gmail.com
+* @Last modified by:   woolson
+* @Last modified time: 2016-11-13 21:11:81
+*/
+
 import "./style"
 import React from "react"
-import md5 from "md5"
 import moment from "moment"
+import cx from "classnames"
+import Empty from "_block-with-empty"
+
+const Color = [
+  "#f1793d",
+  "#E9AA30",
+  "#fae941",
+  "#AFF56E",
+  "#03B765",
+  "#25c9c2",
+  "#55CAF5",
+  "#258ec7",
+  "#ea75a9",
+  "#F74902",
+]
 
 export default React.createClass({
   getInitialState() {
     return {
-      messageList: []
+      messageList: null,
     }
   },
 
@@ -14,21 +36,43 @@ export default React.createClass({
     this.fetchData()
   },
 
-  fetchData() {
-    $.getJSON(__HOST__ + "/fetchAllMessage")
-      .then(d => this.setState({messageList: d}))
+  componentDidUpdate(prevProps, prevState) {
+    this.updatePading()
   },
 
-  submite() {
+  updatePading() {
+    const $list = $(this.refs.list)
+    const scroll = $list[0].offsetWidth - $list[0].scrollWidth
+
+    $list.css("padding-left", scroll)
+  },
+
+  fetchData() {
+    $.getJSON(__HOST__ + "/fetchAllMessage")
+      .then(d => this.setState({messageList: d.messages}))
+  },
+
+  submite(evt) {
+    evt.preventDefault()
+
+    const $send = $("i", $(evt.target))
+    $send.addClass("sending")
+    setTimeout(() => $send.removeClass("sending"), 1100)
+
     let params = {
-      name: "test",
+      author: this.refs.name.value,
       content: this.refs.message.value,
-      response: null
+      response: null,
+      date: moment().format("YYYY-MM-DD HH:MM:SS"),
     }
 
     $.post(__HOST__ + "/insertMessage", params)
       .then(d => {
-        if(d.succ) this.fetchData()
+        if(d.succ) {
+          this.refs.name.value = ""
+          this.refs.message.value = ""
+          this.fetchData()
+        }
       })
   },
 
@@ -39,64 +83,77 @@ export default React.createClass({
   },
 
   renderList() {
-    let result = []
+    if(!this.state.messageList) return null
 
-    this.state.messageList.map((item, index) => {
-      let nameColor = md5(item.author).substring(0, 7)
-      let klass = index % 2 == 0 ? "node-left" : "node-right"
+    return this.state.messageList.reverse().map((item, index) => {
+      const color = Color[~~(Math.random() * 10)]
+      const klass = index % 2 == 0 ? "node-left" : "node-right"
 
-      result.unshift(
-        <div className={ klass } key={ index }>
-          <div className="node-item">
-            <div className="arrow"></div>
-            <ul>
-              <li
-                style={{color: "#" + nameColor}}
-                onClick={ this.respone }
-                title="click to respone him or her"
-              >
-                {item.author}
-              </li>
-              <li>{item.content}</li>
-              <li>
-                <i className="fa fa-calendar u-mr5" />
-                { moment(item.createTime).format("YYYY-MM-DD") }
-              </li>
-            </ul>
-          </div>
+      return <div className="node-item">
+        <div
+          className="node-item__content"
+          style={{
+            background: color,
+            animationDelay: Math.random() * 0.5 + "s",
+          }}
+        >
+          <ul>
+            <li
+              onClick={ this.respone }
+              title="click to respone him or her"
+            >
+              {item.author}
+            </li>
+            <li>{item.content}</li>
+            <li>
+              <i className="fa fa-calendar u-mr5" />
+              <span>{ item.date }</span>
+            </li>
+          </ul>
         </div>
-      )
+      </div>
     })
-
-    return result
   },
 
   render() {
     return <div className="message">
-      <div className="send">
-        <label htmlFor="message">Express your ideas !</label>
+      <form
+        className="send"
+        onSubmit={ this.submite }
+      >
+        <label>Express your ideas !</label>
+
+        <input
+          ref="name"
+          type="text"
+          placeholder="what's your name"
+          required
+        />
+
         <textarea
           type="text"
           id="message"
           ref="message"
           placeholder="Say something …"
           className="form-control"
+          required
         />
-        <div className="button-group">
-          <a
-            role="button"
-            href="javascript:;"
-            className="btn btn-default"
-            onClick={ this.submite }
-          >
-            <i className="fa fa-paper-plane" />
-          </a>
-        </div>
-      </div>
 
-      <div className="message-list">
-        { this.renderList() }
-      </div>
+        <button type="submite">
+          <i className={ cx("fa fa-paper-plane") } />
+        </button>
+      </form>
+
+      <Empty
+        loading={ this.state.messageList == null }
+      >
+        <div
+          ref="list"
+          className="message-list"
+        >
+          { this.renderList() }
+        </div>
+      </Empty>
     </div>
-  }
-});
+  },
+})

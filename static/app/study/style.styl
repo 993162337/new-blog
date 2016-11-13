@@ -1,4 +1,4 @@
-@require "../../style/global"
+@require "global"
 
 .study-list
   background-color #f5f5f5
@@ -7,6 +7,10 @@
   display flex
   flex-direction column
   width 100%
+  ._block-empty
+    width: 100%
+    height: 100%
+    flex-direction: column
   ._tab
     overflow hidden
     padding 0 20%
@@ -22,6 +26,7 @@
     flex 5
     margin auto
     overflow auto
+    width: 100%
     .study-item
       padding 10px 20px 30px 20px
       margin 20px auto

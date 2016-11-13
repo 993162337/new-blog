@@ -3,7 +3,7 @@
 * @Date:   2016-05-23 00-05-00
 * @Email:  wuzeng.li@fugetech.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 16:11:01
+* @Last modified time: 2016-11-13 17:11:53
 */
 
 import mongoose from "mongoose"
@@ -16,6 +16,7 @@ const ArticleSchema = new mongoose.Schema({
     tags: String,
     date: String,
     type: Number,
+    html: Number,
 })
 
 mongoose.model("Articles", ArticleSchema, "articles")

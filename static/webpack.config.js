@@ -3,7 +3,7 @@
 * @Date:   2016-08-19 19:08:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-12 23:11:48
+* @Last modified time: 2016-11-13 17:11:93
 */
 
 var webpack = require("webpack")
@@ -40,7 +40,7 @@ module.exports = {
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.DefinePlugin({
         __DEV__: true,
-        __HOST__: JSON.stringify("http://123.206.220.242"),
+        __HOST__: JSON.stringify("http://127.0.0.1:8081"),
     }),
     ],
     resolve: {
@@ -76,7 +76,7 @@ module.exports = {
         },
           {
             test: /\.styl$/,
-            loader: "style-loader!css-loader!stylus-loader",
+            loader: "style-loader!css-loader!stylus-loader?paths[]=style",
         },
           {
             test: /\.(jpg|png|gif|svg)$/,

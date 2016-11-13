@@ -1,0 +1,22 @@
+@require "global"
+@require "animation"
+
+._block-empty
+  height: 60px
+  width: 120px
+  display: flex
+  justify-content: center
+  align-items: center
+  ._empty-tip
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 60px
+    width: 120px
+    border-radius: 5px
+    border: 2px solid rgba($border-gray, .4)
+    font-size: 1.2rem
+    color: $border-gray
+    animation: flipInX .5s
+  > div:not(._empty-tip)
+    animation: fadeIn .5s

@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-12 23:11:18
+* @Last modified time: 2016-11-13 17:11:93
 */
 
 import "./app.styl"
@@ -15,21 +15,21 @@ import Header from "./_common/_header"
 const App = withRouter(
   React.createClass({
     handleIndex(name) {
-        this.props.router.push(name)
+      this.props.router.push(name)
     },
 
     render() {
-        return <div className="content-body">
+      return <div className="content-body">
         <Header indexChange={ this.handleIndex } />
 
         { this.props.children }
 
         <foot className="foot">
-          ® 2015 Woolson Inc. All right reserved.
+          ® 2015 Woolson Inc. All rights reserved.
         </foot>
       </div>
     },
-})
+  })
 )
 
 const RootRounter = <Router history={ hashHistory }>
@@ -38,28 +38,28 @@ const RootRounter = <Router history={ hashHistory }>
         <Route path="home" getComponent={ (location, callback) => {
             require.ensure([], (require) => {
                 callback(null, require("./home").default)
-            })
-        } }/>
+              })
+          } }/>
         <Route path="study" getComponent={ (location, callback) => {
             require.ensure([], (require) => {
                 callback(null, require("./study").default)
-            })
-        } }/>
+              })
+          } }/>
         <Route path="life" getComponent={ (location, callback) => {
             require.ensure([], (require) => {
                 callback(null, require("./life").default)
-            })
-        } }/>
+              })
+          } }/>
         <Route path="words" getComponent={ (location, callback) => {
             require.ensure([], (require) => {
                 callback(null, require("./words").default)
-            })
-        } }/>
+              })
+          } }/>
         <Route path="about" getComponent={ (location, callback) => {
             require.ensure([], (require) => {
                 callback(null, require("./about").default)
-            })
-        } }/>
+              })
+          } }/>
     </Route>
 </Router>
 

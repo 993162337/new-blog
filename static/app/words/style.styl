@@ -1,158 +1,147 @@
-@require "../../style/global"
+@require "global"
+@require "animation"
 
 .message
   width: 100%
   overflow: auto
-  .send
-    text-align: center
+  display: flex
+  flex-direction: column
+  ._block-empty
+    flex: 1
     width: 100%
-    margin: 0 auto
     padding: 10px 0 30px 0
-    label
-      width: 100%
-      display: block
-      vertical-align: top
-      color: $font-color
-      margin-top: 20px
-    &:after
-      height: 0
-      width: 0
-      border-left: 50px solid transparent
-      border-right: 50px solid transparent
-      border-bottom: 100px solid red
-      display: inline-block
-      span
-        display: inline-block
-        width: 100px
+    height: auto
+    align-items: flex-end
+    justify-content: flex-end
+  .send
+    display: flex
+    flex-direction: column
+    text-align: center
+    width: 300px
+    margin: 0 auto
+    align-items: center
+    justify-content: center
+    input
     textarea
-      width: 350px
-      padding: 0 10px
+      width: 100%
+      border: 1px solid $border-gray
+      border-radius 3px
+      outline: none
+      padding: 10px
+      box-sizing: border-box
+      &:focus
+        border-color:$main-green
+    label
+      margin: 20px 0 10px 0
+    textarea
       box-sizing: border-box
       margin-top: 10px
       outline: none
-      padding: 10px
-      border: 1px solid $border-gray
-      display: inline
-      height: 100px
-      vertical-align: top
+      height: 80px
       resize: none
-      border-radius 5px
-      &:focus
-        border-color:$main-green
-    a
-      display: inline-block
+    button
+      display: flex
+      align-items: center
+      justify-content: center
+      outline: none
       width: 50px
       height: 50px
-      line-height: 50px
       border-radius: 100%
       margin: 20px 0 0 0
-      font-weight: bolder
       font-size: 20px
       color: $main-green
-      text-align: center
       border: 1px solid $border-gray
-      background-image: none
-      padding-right: 3px
-      box-sizing: border-box
+      background-color: white
+      cursor: pointer
+      i
+        margin-left: -2px
+        &.sending
+          animation: fly 1s
       &:hover
-        background: white
+        box-shadow: 0 0 5px $border-gray
+        i
+          animation: bounceIn .5s
       &:active
         background: $main-green
         color: white
-    #message
-      height: 70px
 
   .message-list
+    height: 100%
     width: 100%
-    margin: 0 auto
-    > div:nth-last-child(1)
-      margin-bottom: 0 !important
-      background: url("/assets/images/time-line-half.png") #f5f5f5 center center no-repeat
-    .node-left
-      text-align: right;
-      padding: 15px 0 15px 0;
-      padding-right: 51.5%
-      background: url("/assets/images/time-line.png") #f5f5f5 center center no-repeat
-      .node-item
-        .arrow
-          border-left: 10px solid white
-          left: 100%
-          &:after
-            border-left: 10px solid rgba(0,0,0,.2)
-            left: -9px
-      ul
-          li:nth-child(1)
-            color: #59d5d1
-            font-size: 15px
-            &:after
-              content: "•"
-              position: absolute
-              right: 15px
-          li:nth-child(2)
-            text-align: left
-    .node-right
-      text-align: left;
-      padding-left: 51.5%;
-      background: url("/assets/images/time-line.png") #f5f5f5 center center no-repeat
-      .node-item
-        .arrow
-          border-right: 10px solid white
-          right: 100%
-          &:after
-            border-right: 10px solid rgba(0,0,0,.2)
-            left: -1px
-        ul
-          li:nth-child(1)
-            color: #edbb21
-            font-size: 15px
-            &:before
-              content: "•"
-              position: absolute
-              margin-left: -10px
-    .node-left, .node-right
-      margin-bottom: -15px
-      .node-item
-        background-color: #fff
-        border: 1px solid rgba(0,0,0,0.2)
-        border-radius: 6px
-        padding: 8px 25px
+    overflow-y: auto
+    color: white
+    .node-item
+      box-sizing: border-box
+      .node-item__content
         display: inline-block
+        padding: 10px 20px
         position: relative
-        z-index: 99
-        max-width: 400px
-        box-shadow: 0 0 3px #ccc;
-        .arrow
-          width: 0
-          height: 0
-          border-top: 10px solid transparent
-          border-bottom: 10px solid transparent
+        box-sizing: border-box
+        opacity: 0.8
+        max-width: 25vw
+        &:after
           position: absolute
-          top: 50%
-          margin-top: -10px
+          left: 0
+          top: 0
+          content: " "
+          width: 10px
+          height: 100%
+      ul
+        list-style: none
+        padding: 0
+        line-height: 20px
+        @keyframes scale
+          100% {
+            transform: scale(1.5)
+          }
+      &:nth-child(even)
+        padding-left: 50%
+        > div
+          border-radius: 0 5px 5px 0
+          animation: rotate 2s infinite
+          transform-origin: left
           &:after
-            width: 0
-            height: 0
-            border-top: 10px solid transparent
-            border-bottom: 10px solid transparent
-            position: absolute
-            content: ""
-            top: -10px
-            z-index: -1
-        ul
-          margin: 0
-          padding: 0
-          list-style: none
-          li:nth-child(1)
-            cursor: pointer
-            display: inline-block
-          li:nth-child(2)
-            color: $font-color
-            font-size: 14px
-            margin: 10px 0 8px 0
-          li:nth-child(3)
-            color: #888
-            font-size: 12px
-            padding-left: 14px
-            background-size: 10px
-            line-height: 12px;
-            display: inline;
+            background: linear-gradient(to left, rgba(white, 0), rgba(0, 0, 0, .1))
+          &:hover
+            transform: rotate3d(0, 1, 0, 0deg)
+            animation: none
+            opacity: 1
+            transform-origin: left
+      &:nth-child(odd)
+        padding-right: 50%
+        text-align: right
+        > div
+          border-radius: 5px 0 0 5px
+          animation: rotate 2.5s infinite
+          transform-origin: right
+          &:after
+            background: linear-gradient(to right, rgba(white, 0), rgba(0, 0, 0, .1))
+            left: auto
+            right: 0
+          &:hover
+            transform: rotate3d(0, 1, 0, 0deg)
+            animation: none
+            opacity: 1
+            transform-origin: right
+@keyframes fly
+  100% {
+    margin-top: -500px
+    margin-right: -500px
+    transform: scale(3)
+    filter: blur(2px)
+    opacity: 0
+  }
+
+@keyframes rotate
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg)
+  }
+  30% {
+    transform: rotate3d(0, 1, 0, 20deg)
+  }
+  80% {
+    transform: rotate3d(0, 1, 0, -10deg)
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 0deg)
+  }
