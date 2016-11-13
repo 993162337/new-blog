@@ -1,38 +1,22 @@
-import mysql from "mysql"
-import Map from "../db/mapping"
-import Conf from "../db/config"
+/**
+* @Author: woolson
+* @Date:   2016-08-07 01:08:00
+* @Email:  woolson.lee@gmail.com
+* @Last modified by:   woolson
+* @Last modified time: 2016-11-13 16:11:93
+*/
+
+import mongoose from "mongoose"
 import { jsonWrite } from "../global/utils"
+import { articleDB } from "../db/mongodb"
 
-const pool = mysql.createPool(Conf)
-
-const getAll = (res, type) => {
-    pool.getConnection((err, con) => {
-        con.query(Map[type], (err, result) => {
-            jsonWrite(res, result)
-            con.release()
-        })
-    })
-}
+const Article = articleDB()
 
 export default {
     // fetch all article list
     fetchAllArticle(req, res) {
-        getAll(res, "getAllArticle")
-    },
-    // fetch all message
-    fetchAllMessage(req, res) {
-        getAll(res, "getAllMessage")
-    },
-    // insert message
-    insertMessage(req, res) {
-        let data = req.body
-        let params = [data.name, data.content, data.response]
-
-        pool.getConnection((err, con) => {
-            con.query(Map.insertMessage, params, (err, result) => {
-                jsonWrite(res, result)
-                con.release()
-            })
+        Article.find({}, (err, docs) => {
+            jsonWrite(res, err ? {succ: false} : {articles: docs})
         })
-    }
+    },
 }
