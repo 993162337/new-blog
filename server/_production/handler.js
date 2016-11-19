@@ -1,1 +1,59 @@
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var _mysql=require("mysql"),_mysql2=_interopRequireDefault(_mysql),_mapping=require("./db/mapping"),_mapping2=_interopRequireDefault(_mapping),_config=require("./db/config"),_config2=_interopRequireDefault(_config),_utils=require("./global/utils"),pool=_mysql2["default"].createPool(_config2["default"]),getAll=function(e,t){pool.getConnection(function(n,i){i.query(_mapping2["default"][t],function(t,n){(0,_utils.jsonWrite)(e,n),i.release()})})};exports["default"]={fetchAllArticle:function(e,t){getAll(t,"getAllArticle")},fetchAllMessage:function(e,t){getAll(t,"getAllMessage")},insertMessage:function(e,t){var n=e.body,i=[n.name,n.content,n.response];pool.getConnection(function(e,n){n.query(_mapping2["default"].insertMessage,i,function(e,i){(0,_utils.jsonWrite)(t,i),n.release()})})}};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _mysql = require("mysql");
+
+var _mysql2 = _interopRequireDefault(_mysql);
+
+var _mapping = require("./db/mapping");
+
+var _mapping2 = _interopRequireDefault(_mapping);
+
+var _config = require("./db/config");
+
+var _config2 = _interopRequireDefault(_config);
+
+var _utils = require("./global/utils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var pool = _mysql2.default.createPool(_config2.default);
+
+var getAll = function getAll(res, type) {
+    pool.getConnection(function (err, con) {
+        con.query(_mapping2.default[type], function (err, result) {
+            (0, _utils.jsonWrite)(res, result);
+            con.release();
+        });
+    });
+};
+
+exports.default = {
+    // fetch all article list
+
+    fetchAllArticle: function fetchAllArticle(req, res) {
+        getAll(res, "getAllArticle");
+    },
+
+    // fetch all message
+    fetchAllMessage: function fetchAllMessage(req, res) {
+        getAll(res, "getAllMessage");
+    },
+
+    // insert message
+    insertMessage: function insertMessage(req, res) {
+        var data = req.body;
+        var params = [data.name, data.content, data.response];
+
+        pool.getConnection(function (err, con) {
+            con.query(_mapping2.default.insertMessage, params, function (err, result) {
+                (0, _utils.jsonWrite)(res, result);
+                con.release();
+            });
+        });
+    }
+};
+//# sourceMappingURL=handler.js.map

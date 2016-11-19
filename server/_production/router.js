@@ -1,1 +1,35 @@
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}var _handler=require("./handler"),_handler2=_interopRequireDefault(_handler);exports.construct=function(e){e.get("/fetchAllArticle",function(e,t){_handler2["default"].fetchAllArticle(e,t)}),e.get("/fetchAllMessage",function(e,t){_handler2["default"].fetchAllMessage(e,t)}),e.post("/insertMessage",function(e,t){_handler2["default"].insertMessage(e,t)}),e.get("/",function(e,t){t.redirect("/index.html")}),e.get("/login",function(e,t){_handler2["default"].fetchUserInfo(e,t)})};
+"use strict";
+
+var _handler = require("./handler");
+
+var _handler2 = _interopRequireDefault(_handler);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.construct = function (app) {
+    app.get("/fetchAllArticle", function (req, res) {
+        _handler2.default.fetchAllArticle(req, res);
+    });
+
+    app.get("/fetchAllMessage", function (req, res) {
+        _handler2.default.fetchAllMessage(req, res);
+    });
+
+    app.post("/insertMessage", function (req, res) {
+        _handler2.default.insertMessage(req, res);
+    });
+
+    app.get("/", function (req, res) {
+        res.redirect("/index.html");
+    });
+
+    app.get("/login", function (req, res) {
+        _handler2.default.fetchUserInfo(req, res);
+    });
+}; /*
+   * @Author: wuzeng
+   * @Date:   2016-07-17 01:05:19
+   * @Last Modified by:   wuzeng
+   * @Last Modified time: 2016-08-05 23:32:08
+   */
+//# sourceMappingURL=router.js.map

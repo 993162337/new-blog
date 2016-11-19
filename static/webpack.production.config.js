@@ -62,7 +62,7 @@ module.exports = {
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DefinePlugin({
             __DEV__: false,
-            __HOST__: JSON.stringify("http://www.woolson.cn"),
+            __HOST__: JSON.stringify(""),
           }),
         function() {
             this.plugin("done", function(stats) {

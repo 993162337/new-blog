@@ -1,1 +1,75 @@
-"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.fetchUrlwithParams=exports.fetchRandomStr=exports.jsonWrite=exports.extend=void 0;var _arguments=arguments,_moment=require("moment"),_moment2=_interopRequireDefault(_moment),_request=require("request"),_request2=_interopRequireDefault(_request),extend=exports.extend=function(){for(var e={},r=_arguments,t=function(t){var n=Object.keys(_arguments[t]);n.forEach(function(n){e[n]=r[t][n]})},n=0;n<r.length;n++)t(n);return e},jsonWrite=exports.jsonWrite=function(e,r){"undefined"==typeof r?e.json({succ:!1,msg:"操作失败"}):(r.succ=!0,r.msg="成功",e.json(r))},fetchRandomStr=exports.fetchRandomStr=function(e){e||(e=32);for(var r="00123456789abcdefghigklmnopqrstuvwxyzz",t="",n=0;n<e;n++){var o=r[+(38*Math.random()).toFixed(0)];t+=o?o:"x"}return t},fetchUrlwithParams=exports.fetchUrlwithParams=function(e){if(!e.url)return console.err("constructParams needs obj.url is a string");var r=e.url;delete e.url;var t=Object.keys(e);return t.forEach(function(t,n){var o=n?"&":"?";r+=""+o+t+"="+e[t]}),r};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.fetchUrlwithParams = exports.fetchRandomStr = exports.jsonWrite = exports.extend = undefined;
+var _arguments = arguments;
+
+var _moment = require("moment");
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _request = require("request");
+
+var _request2 = _interopRequireDefault(_request);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 合并对象
+var extend = exports.extend = function extend() {
+    var result = {},
+        args = _arguments;
+
+    var _loop = function _loop(i) {
+        var keys = Object.keys(_arguments[i]);
+        keys.forEach(function (item) {
+            result[item] = args[i][item];
+        });
+    };
+
+    for (var i = 0; i < args.length; i++) {
+        _loop(i);
+    }
+
+    return result;
+};
+
+// 构造返回的json数据
+var jsonWrite = exports.jsonWrite = function jsonWrite(res, ret) {
+    if (typeof ret === "undefined") {
+        res.json({ succ: false, msg: "操作失败" });
+    } else {
+        ret.succ = true;
+        ret.msg = "成功";
+        res.json(ret);
+    }
+};
+
+// 获取随机字符串
+var fetchRandomStr = exports.fetchRandomStr = function fetchRandomStr(len) {
+    if (!len) len = 32;
+    var str = "00123456789abcdefghigklmnopqrstuvwxyzz",
+        result = "";
+    for (var i = 0; i < len; i++) {
+        var item = str[+(Math.random() * 38).toFixed(0)];
+        result += item ? item : "x";
+    }
+    return result;
+};
+
+// 拼接url
+var fetchUrlwithParams = exports.fetchUrlwithParams = function fetchUrlwithParams(obj) {
+    if (!obj.url) return console.err("constructParams needs obj.url is a string");
+    var _url = obj.url;
+    delete obj.url;
+
+    var _keys = Object.keys(obj);
+    _keys.forEach(function (item, index) {
+        var _symbol = index ? "&" : "?";
+        _url += "" + _symbol + item + "=" + obj[item];
+    });
+
+    return _url;
+};
+//# sourceMappingURL=utils.js.map

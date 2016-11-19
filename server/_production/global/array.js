@@ -1,1 +1,6 @@
-"use strict";Array.prototype.has=function(t){return this.indexOf(t)>-1};
+"use strict";
+
+Array.prototype.has = function (item) {
+    return this.indexOf(item) > -1;
+};
+//# sourceMappingURL=array.js.map
