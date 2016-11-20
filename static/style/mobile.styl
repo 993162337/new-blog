@@ -1,22 +1,22 @@
 @require "global"
 
 .message
+  display: block
   .message-list
-    -webkit-overflow-scrolling: touch
-    .node-item:nth-child(odd)
-      padding-right: 0
-      text-align: left
+    height: auto
+    .node-item
+      text-align: center !important
+      padding: 0 !important
       > div
-        animation: none
-    .node-item:nth-child(even)
-      padding-left: 0
-      > div
-        animation: none
+        animation: none !important
     .node-item__content
       width: 95vw
       border-radius: 5px !important
       max-width: 100vw !important
       margin-bottom: 10px
+  .send
+    button
+      text-align: center
 
 .home-page
   img
@@ -38,6 +38,10 @@
     .study-item
       width: 90% !important
       box-sizing: border-box
+
+::-webkit-scrollbar
+  width: 0
+  height: 0
 
 @keyframes rotate
   0% {
