@@ -4,26 +4,54 @@
   background-color $background-gray
   border-bottom 1px solid $border-gray
   position relative
-  .navs
-    width 500px
-    display flex
-    justify-content center
-    margin 0 auto
-    padding 0
-    list-style none
-    position relative
+
+._header__navs_pc
+  width 500px
+  display flex
+  justify-content center
+  margin 0 auto
+  padding 0
+  list-style none
+  position relative
+  li
+    width 100px
+    padding 20px
+    line-height 25px
+    text-align center
+    cursor pointer
+    &:nth-last-child(1)
+      position absolute
+      left 0
+      bottom 0
+      border-bottom: 5px solid $main-blue
+      box-sizing border-box
+
+._header__navs_mobile
+  display: inline-block
+  position: relative
+  height: 2rem
+  width: 2rem
+  margin: 0.5rem
+  text-align: center
+  i
+    font-size: 1.5rem
+    line-height: 2rem
+    cursor: pointer
+  ul
+    display: none
+    width: 102vw
+    position: absolute
+    top: 2.6rem
+    left: -1rem
+    padding: 1rem 0
+    margin: 0
+    list-style: none
+    border-bottom: 1px solid $border-gray
+    background: rgba($background-gray, .9)
+    z-index: 9999
     li
-      width 100px
-      padding 20px
-      line-height 25px
-      text-align center
-      cursor pointer
-      &:nth-last-child(1)
-        position absolute
-        left 0
-        bottom 0
-        border-bottom: 5px solid $main-blue
-        box-sizing border-box
+      padding: 15px
+      text-align: center
 
 ._header-contact
   position: absolute
@@ -37,3 +65,15 @@
     cursor: pointer
     &:hover
       text-shadow: 0 0 4px #FFF
+  &.mobile
+    display: inline-block
+    position: relative
+    margin-left: auto
+    float: right
+    margin: 0.5rem
+    i
+      font-size: 2rem
+      margin-right: 0 !important
+    a
+      display: inline-block
+      height: 32px

@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 17:11:93
+* @Last modified time: 2016-11-20 03:11:79
 */
 
 import "./app.styl"
@@ -24,9 +24,11 @@ const App = withRouter(
 
         { this.props.children }
 
-        <foot className="foot">
-          ® 2015 Woolson Inc. All rights reserved.
-        </foot>
+        {
+          Global.equiv == "pc" && <foot className="foot">
+              ® 2015 Woolson Inc. All rights reserved.
+            </foot>
+        }
       </div>
     },
   })

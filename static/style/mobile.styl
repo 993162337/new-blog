@@ -1,0 +1,48 @@
+@require "global"
+
+.message
+  .message-list
+    -webkit-overflow-scrolling: touch
+    .node-item:nth-child(odd)
+      padding-right: 0
+      text-align: left
+      > div
+        animation: none
+    .node-item:nth-child(even)
+      padding-left: 0
+      > div
+        animation: none
+    .node-item__content
+      width: 95vw
+      border-radius: 5px !important
+      max-width: 100vw !important
+      margin-bottom: 10px
+
+.home-page
+  img
+    width: 90vw
+
+.about
+  display: flex
+  align-items: center
+  justify-content: center
+  img
+    width: 50vw !important
+    animation: rotate 5s linear infinite
+
+.study-list
+  ._tab ul
+    li.active
+      color: $main-blue !important
+  .artical-list
+    .study-item
+      width: 90% !important
+      box-sizing: border-box
+
+@keyframes rotate
+  0% {
+    transform: rotate(0)
+  }
+  100% {
+    transform: rotate(360deg)
+  }

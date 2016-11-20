@@ -76,3 +76,26 @@
   100% {
     opacity: 1
   }
+
+@keyframes fly
+  100% {
+    margin-top: -500px
+    margin-right: -500px
+    transform: scale(3)
+    filter: blur(2px)
+    opacity: 0
+  }
+
+@keyframes rotate
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg)
+  }
+  30% {
+    transform: rotate3d(0, 1, 0, 20deg)
+  }
+  80% {
+    transform: rotate3d(0, 1, 0, -10deg)
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 0deg)
+  }

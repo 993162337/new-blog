@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 22:11:27
+* @Last modified time: 2016-11-20 02:11:66
 */
 
 import "./style"
@@ -60,21 +60,34 @@ export default React.createClass({
 
   render() {
     return <div className="_header">
-      <ul ref="root" className="navs">
-        { this.renderNavs() }
+      {
+        Global.equiv == "mobile"
+          ? <div
+              className="_header__navs_mobile"
+              onClick={ () => {
+                const $nav = $(this.refs.nav)
+                const option = $nav.is(":hidden") ? "slideDown" : "slideUp"
+                $nav[option](300)
+              } }
+            >
+              <i className="fa fa-bars" />
+              <ul ref="nav" className="">
+                { this.renderNavs() }
+              </ul>
+            </div>
+          : <ul ref="root" className="_header__navs_pc">
+              { this.renderNavs() }
 
-        <li ref="highLight" />
-      </ul>
+              <li ref="highLight" />
+            </ul>
+      }
 
-      <div className="_header-contact">
-        <a href="https://github.com/993162337" target="_blank">
-          <i className="fa fa-github u-mr10" />
-        </a>
-
-        <a href="mailto:woolson.lee@gmail.com" target="_blank">
-          <i className="fa fa-google-plus-official u-mr10" />
-        </a>
-      </div>
+      <a
+        className={ cx("_header-contact", {mobile: Global.equiv == "mobile"}) }
+        href="https://github.com/993162337" target="_blank"
+      >
+        <i className="fa fa-github u-mr10" />
+      </a>
     </div>
   },
 })

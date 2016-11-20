@@ -2,12 +2,19 @@
 # @Date:   2016-11-10 10:11:00
 # @Email:  woolson.lee@gmail.com
 # @Last modified by:   woolson
-# @Last modified time: 2016-11-12 23:11:94
+# @Last modified time: 2016-11-20 14:11:34
 
 SHELL := /bin/bash
 
 assets = "assets/vendor/"
 dist = "dist/"
+
+# 构建mobile
+build-mobile:
+	rm -rf _mobile/*
+	rsync -r --exclude="index.html" _production/ _mobile/
+	cp html/m.index.html _mobile/index.html
+	node shell/build-mobile.js
 
 build-vendors:
 	rm _dev/vendors* _production/vendors*
@@ -21,7 +28,8 @@ build-app:
 build-app-compress:
 	@echo -e "\033[1;32m Building production ... !\033[m"
 	rm -rf `ls _production/*.*.css _production/*.*.js|egrep -v 'vendors*'`
-	touch AllStyle.styl
+	touch app.styl
+	touch mobile.styl
 	NODE_ENV=production webpack --config webpack.production.config.js --colors --progress
 	@echo -e "\033[1;32m Build production successful !\033[m"
 
@@ -29,3 +37,4 @@ deploy-web:
 	# cp -rf dev/ ../sever/templates
 	@echo -e "\033[1;32m Syncing files to static resource of server\033[m"
 	rsync -r -l --progress --delete _production/ root@123.206.220.242:/home/woolson/static
+	rsync -r -l --progress --delete _mobile/ root@123.206.220.242:/home/woolson/mobile
