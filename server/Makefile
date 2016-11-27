@@ -1,6 +1,8 @@
 SHELL := /bin/bash
 
 build-dev:
+	cp -rf articles/ _dev/articles/
+	cp -rf articles/ _production/articles/
 	@echo -e "\033[1;32m Build files for develop\033[m"
 	babel -w app/ -d _dev/ -s
 

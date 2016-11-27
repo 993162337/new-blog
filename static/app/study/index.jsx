@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 21:11:94
+* @Last modified time: 2016-11-27 20:11:93
 */
 
 import "./style"
@@ -64,7 +64,7 @@ export default React.createClass({
       return <div id={item.id}
         key={item.id}
         className="study-item"
-        onClick={ this.redirect.bind(null, item.html || "./html/2016111001.html") }
+        onClick={ this.redirect.bind(null, `./articles/${item.html || "test"}`) }
       >
         <a>{item.title}</a>
 
