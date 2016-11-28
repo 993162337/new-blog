@@ -3,7 +3,7 @@
 * @Date:   2016-11-26 17:11:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-27 20:11:17
+* @Last modified time: 2016-11-27 21:11:34
 */
 
 var express = require("express")
@@ -38,9 +38,14 @@ function formatHTML(title, content) {
 
 export default app => {
   app.param("article_name", (req, res, next, name) => {
-    const filePath = path.join(__dirname, "../../../", `/static/articles/${name}.md`)
-    const content = fs.readFileSync(filePath, "utf8")
-    const html = markdown.makeHtml(content)
+    let filePath, content, html
+    filePath = path.join(__dirname, "../../../", `/static/articles/${name}.md`)
+    try {
+      content = fs.readFileSync(filePath, "utf8")
+    } catch (e) {
+      content = "Author had removed this article, Sorry!"
+    }
+    html = markdown.makeHtml(content)
 
     res.send(formatHTML(name, html))
     next()
