@@ -2,7 +2,7 @@
 # @Date:   2016-11-10 10:11:00
 # @Email:  woolson.lee@gmail.com
 # @Last modified by:   woolson
-# @Last modified time: 2016-11-20 14:11:34
+# @Last modified time: 2016-11-29 09:11:80
 
 SHELL := /bin/bash
 
@@ -12,7 +12,7 @@ dist = "dist/"
 # 构建mobile
 build-mobile:
 	rm -rf _mobile/*
-	rsync -r --exclude="index.html" _production/ _mobile/
+	rsync -r --exclude="index.html" --exclude="public" _production/ _mobile/
 	cp html/m.index.html _mobile/index.html
 	node shell/build-mobile.js
 

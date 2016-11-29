@@ -3,7 +3,7 @@
 * @Date:   2016-11-26 17:11:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-27 21:11:34
+* @Last modified time: 2016-11-29 09:11:83
 */
 
 var express = require("express")
@@ -17,7 +17,10 @@ function formatHTML(title, content) {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="UTF-8">
+      <meta charset="text/html; charset=UTF-8" http-equiv="content-type">
+      <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+      <meta content="telephone=no" name="format-detection">
+      <meta content="address=no" name="format-detection">
       <title>${title}</title>
       <link rel="stylesheet" href="http://www.woolson.cn/assets/styles/md-themes/monokai.css">
       <link rel="stylesheet" href="https://dn-maxiang.qbox.me/res-min/themes/marxico.css">

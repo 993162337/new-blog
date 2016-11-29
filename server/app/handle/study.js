@@ -3,7 +3,7 @@
 * @Date:   2016-08-07 01:08:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 16:11:93
+* @Last modified time: 2016-11-28 23:11:79
 */
 
 import mongoose from "mongoose"
@@ -16,6 +16,7 @@ export default {
     // fetch all article list
     fetchAllArticle(req, res) {
         Article.find({}, (err, docs) => {
+            console.log(docs);
             jsonWrite(res, err ? {succ: false} : {articles: docs})
         })
     },
