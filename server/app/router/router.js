@@ -6,21 +6,22 @@
 */
 
 import handler from "../handler"
-import indexPage from "./page/index"
 import studyPage from "./page/study"
 import messagePage from "./page/message"
 import articles from "./page/articles"
+import path from "path"
 
 export default app => {
-    // index page apis and basic routers
-    indexPage(app)
-
     //study page routers and apis
     studyPage(app)
+
+    //articles router
+    articles(app)
 
     //message page routers and apis
     messagePage(app)
 
-    //articles router
-    articles(app)
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../../static/", "index.html"))
+    })
 }

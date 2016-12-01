@@ -26,7 +26,6 @@ function formatHTML(title, content) {
       <link rel="stylesheet" href="http://www.woolson.cn/assets/styles/md-themes/monokai.css">
       <link rel="stylesheet" href="https://dn-maxiang.qbox.me/res-min/themes/marxico.css">
       <link rel="stylesheet" href="http://www.woolson.cn/assets/styles/common-css.css">
-      <script src="http://www.woolson.cn/assets/js/common-js.js"></script>
       <script src="http://www.woolson.cn/assets/js/highlight.pack.js"></script>
       <script>hljs.initHighlightingOnLoad();</script>
     </head>
@@ -36,6 +35,7 @@ function formatHTML(title, content) {
         ${content}
         <div id="disqus_thread"></div>
       </div>
+      <script src="http://www.woolson.cn/assets/js/common-js.js"></script>
       <script>
         (function() { // DON'T EDIT BELOW THIS LINE
           var d = document, s = d.createElement('script');
@@ -65,7 +65,7 @@ export default app => {
     next()
   })
 
-  app.get("/articles/:article_name", (req, res) => {
+  app.get("/study/:article_name", (req, res) => {
     res.end()
   })
 }
