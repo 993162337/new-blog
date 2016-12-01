@@ -22,6 +22,12 @@ export default app => {
     messagePage(app)
 
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, "../../static/", "index.html"))
+      const deviceAgent = req.headers["user-agent"].toLowerCase()
+      const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/)
+      let htmlPath = "../../static/index.html"
+
+      if(agentID) htmlPath = "../../mobile/index.html"
+
+      res.sendFile(path.resolve(__dirname, htmlPath))
     })
 }

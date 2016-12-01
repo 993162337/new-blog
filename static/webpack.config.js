@@ -61,7 +61,7 @@ module.exports = {
             loader: "babel?cacheDirectory=true&presets[]=es2015&presets[]=stage-0&presets[]=react",
             exclude: /node_modules/,
         },
-          {
+        {
             test: /\.js$/,
             loader: "babel",
             query: {

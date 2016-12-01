@@ -18,8 +18,7 @@ var fileHash = assign({}, vendors)
 
 var File = {
   replace: function(filePath) {
-    var path = "_production/index.html"
-    var content = fs.readFileSync(path, "utf8")
+    var content = fs.readFileSync(filePath, "utf8")
     var files = ["appJS", "initJS", "appCSS", "vendorsJS", "vendorsCSS", "mobileCSS"]
 
     // replace string
@@ -27,7 +26,7 @@ var File = {
       content = content.replace("<" + item + ">", fileHash[item])
     })
 
-    fs.writeFileSync(path, content, "utf8")
+    fs.writeFileSync(filePath, content, "utf8")
   },
   createCss: function(path, name) {
     var file = name + ".css"
@@ -89,7 +88,7 @@ module.exports = {
           files.forEach(function(item, index) {
             File.createCss(cssFile[index], item)
           })
-          File.replace()
+          File.replace("_production/index.html")
         }
       })
     }

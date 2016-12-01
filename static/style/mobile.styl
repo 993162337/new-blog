@@ -1,5 +1,12 @@
 @require "global"
 
+.content-body__header
+  background: $background-gray
+
+.content-body__header_contact
+  i
+    color: $font-color
+
 .message
   display: block
   .message-list
@@ -32,12 +39,15 @@
 
 .study-list
   ._tab ul
+    width: 100%
     li.active
       color: $main-blue !important
   .artical-list
     .study-item
       width: 90% !important
       box-sizing: border-box
+      a
+        font-size: 1.2rem
 
 ::-webkit-scrollbar
   width: 0

@@ -6,7 +6,7 @@ export default React.createClass({
     return (
       <div className="about">
         <div className="about-logo">
-          <img src="../../assets/images/logo.png" />
+          <img src={ require("../assets/images/logo.png") } />
         </div>
       </div>
     )
