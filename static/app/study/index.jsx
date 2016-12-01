@@ -64,7 +64,7 @@ export default React.createClass({
       return <div id={item.id}
         key={item.id}
         className="study-item"
-        onClick={ this.redirect.bind(null, `./articles/${item.article || "test"}`) }
+        onClick={ this.redirect.bind(null, `./study/${item.article || "test"}`) }
       >
         <a>{item.title}</a>
 

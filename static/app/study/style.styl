@@ -43,8 +43,11 @@
         display block
         margin 15px 0
         font-size 25px
-        line-height: 25px
+        line-height: 28px
         color $main-blue
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+        background-image linear-gradient(to right, $main-blue, $main-green)
         cursor pointer
         text-decoration none
       .study-content
@@ -54,9 +57,11 @@
         margin-bottom 0px
         line-height 22px
         color #444
+      .study-tag span
+        color: darken($border-gray, 20%)
       .study-more
         float right
-        color $main-blue
+        color $main-green
         &:hover
           text-decoration underline
           cursor pointer
@@ -75,7 +80,6 @@
       font-size 16px
       line-height 35px
       text-indent 35px
-      font-family "ubuntu"
       color #666
     .button
       text-align center

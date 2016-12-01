@@ -23,7 +23,7 @@ build-vendors:
 	@echo -e "\033[1;32m Complete build vendors ... !\033[m"
 
 build-app:
-	webpack-dev-server --config webpack.config.js --hot --inline --progress
+	webpack-dev-server --config webpack.config.js --hot --inline --progress --history-api-fallback
 
 build-app-compress:
 	@echo -e "\033[1;32m Building production ... !\033[m"
@@ -32,6 +32,7 @@ build-app-compress:
 	touch mobile.styl
 	NODE_ENV=production webpack --config webpack.production.config.js --colors --progress
 	@echo -e "\033[1;32m Build production successful !\033[m"
+	make build-mobile
 
 deploy-web:
 	# cp -rf dev/ ../sever/templates
