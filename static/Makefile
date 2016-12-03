@@ -38,4 +38,4 @@ deploy-web:
 	# cp -rf dev/ ../sever/templates
 	@echo -e "\033[1;32m Syncing files to static resource of server\033[m"
 	rsync -r -l --progress --delete _production/ root@123.206.220.242:/home/woolson/static
-	rsync -r -l --progress --delete _mobile/ root@123.206.220.242:/home/woolson/mobile
+	# rsync -r -l --progress --delete _mobile/ root@123.206.220.242:/home/woolson/mobile

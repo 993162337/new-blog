@@ -36,6 +36,15 @@ const App = React.createClass({
     }
   },
 
+  getIndex() {
+    const path = this.props.location.pathname
+    let navIndex = Navs.findIndex(o => path.has(o.toLowerCase()))
+    if(path == "/") navIndex = 0
+    if(path == "article") navIndex = 1
+
+    return navIndex
+  },
+
   handleChange(index) {
     let name = Navs[index].toLowerCase()
 
@@ -45,15 +54,12 @@ const App = React.createClass({
   },
 
   renderNavs() {
-    const path = this.props.location.pathname
-    let navIndex = Navs.findIndex(o => path.has(o.toLowerCase()))
-    if(path == "/") navIndex = 0
-    if(path == "article") navIndex = 1
+    
 
     return Navs.map((item, index) => {
       return <li
         key={ index }
-        className={ cx({active: index == navIndex}) }
+        className={ cx({active: index == this.getIndex()}) }
         onClick={ this.handleChange.bind(null, index) }
       >
         { item }
@@ -99,7 +105,7 @@ const App = React.createClass({
                     className="highLight"
                     ref="highLight"
                     style={{
-                      transform: `translate(0, ${65 * this.state.index}px)`,
+                      transform: `translate(0, ${65 * this.getIndex()}px)`,
                       transition: "all .4s",
                     }} />
                   { this.renderNavs() }
