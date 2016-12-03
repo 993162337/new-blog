@@ -30,6 +30,12 @@ const App = React.createClass({
     }
   },
 
+  componentDidMount() {
+    window.onload = function() {
+      console.log("load")
+    }
+  },
+
   handleChange(index) {
     let name = Navs[index].toLowerCase()
 
@@ -39,22 +45,28 @@ const App = React.createClass({
   },
 
   renderNavs() {
-    return Navs.map((item, index) => <li
+    const path = this.props.location.pathname
+    let navIndex = Navs.findIndex(o => path.has(o.toLowerCase()))
+    if(path == "/") navIndex = 0
+    if(path == "article") navIndex = 1
+
+    return Navs.map((item, index) => {
+      return <li
         key={ index }
-        className={ cx({active: this.props.location.pathname.has(item.toLowerCase())}) }
+        className={ cx({active: index == navIndex}) }
         onClick={ this.handleChange.bind(null, index) }
       >
         { item }
-      </li>)
+      </li>})
   },
 
   render() {
-    return <div className="content-body">
-      <div className="content-body__header">
+    return <div className="app">
+      <div className="app-navs">
         {
           Global.equiv == "mobile"
             ? <div
-                className="content-body__header__navs_mobile"
+                className="content-navs_mobile"
                 onClick={ () => {
                   const $nav = $(this.refs.nav)
                   const option = $nav.is(":hidden") ? "slideDown" : "slideUp"
@@ -67,31 +79,53 @@ const App = React.createClass({
                   { this.renderNavs() }
                 </ul>
               </div>
-            : <ul ref="root" className="content-body__header__navs_pc">
-                { this.renderNavs() }
+            : <div className="content-navs_pc">
+                <div className="content-navs_pc_info">
+                  <img 
+                    className="u-mb20"
+                    src={ require("./assets/images/logo.png") }
+                  />
 
-                <li ref="highLight" style={{
-                  transform: `translate(${100 * this.state.index}%)`,
-                  transition: "all .4s",
-                }} />
-              </ul>
+                  <a
+                    className={ cx("content-body__header_contact", {mobile: Global.equiv == "mobile"}) }
+                    href="https://github.com/993162337" target="_blank"
+                  >
+                    <i className="fa fa-github" />
+                  </a>
+                </div>
+
+                <ul ref="root" className="content-navs_pc_nav">
+                  <li
+                    className="highLight"
+                    ref="highLight"
+                    style={{
+                      transform: `translate(0, ${65 * this.state.index}px)`,
+                      transition: "all .4s",
+                    }} />
+                  { this.renderNavs() }
+                </ul>
+
+                <foot className="content-navs_pc_copyright">
+                  ® 2015 woolson Inc. All rights reserved.
+                </foot>
+              </div>
         }
-
-        <a
-          className={ cx("content-body__header_contact", {mobile: Global.equiv == "mobile"}) }
-          href="https://github.com/993162337" target="_blank"
-        >
-          <i className="fa fa-github u-mr10" />
-        </a>
       </div>
 
-      { this.props.children }
+      <div
+        className="app-content"
+        style={{
+          backgroundImage: `url(${require("./assets/images/hi.svg")})`
+        }}
+      >
+        <div className="app-content__container">
+          { this.props.children }
+        </div>
 
-      {
-        Global.equiv == "pc" && <foot className="foot">
-            ® 2015 Woolson Inc. All rights reserved.
-          </foot>
-      }
+        <div className="app-content__info">
+
+        </div>
+      </div>
     </div>
   },
 })
@@ -99,31 +133,37 @@ const App = React.createClass({
 const RootRounter = <Router history={ browserHistory }>
     <Route path="/" component={ App }>
         <IndexRoute getComponent={ (location, callback) => {
-            require.ensure([], (require) => {
+            require.ensure([], require => {
                 callback(null, require("./home").default)
               })
           } }/>
 
         <Route path="study" getComponent={ (location, callback) => {
-            require.ensure([], (require) => {
+            require.ensure([], require => {
                 callback(null, require("./study").default)
               })
           } }/>
 
+        <Route path="article" getComponent={ (location, callback) => {
+            require.ensure([], require => {
+              callback(null, require("./study/component/article").default)
+            })
+          } }/>
+
         <Route path="life" getComponent={ (location, callback) => {
-            require.ensure([], (require) => {
+            require.ensure([], require => {
                 callback(null, require("./life").default)
               })
           } }/>
 
         <Route path="words" getComponent={ (location, callback) => {
-            require.ensure([], (require) => {
+            require.ensure([], require => {
                 callback(null, require("./words").default)
               })
           } }/>
 
         <Route path="about" getComponent={ (location, callback) => {
-            require.ensure([], (require) => {
+            require.ensure([], require => {
                 callback(null, require("./about").default)
               })
           } }/>

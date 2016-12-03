@@ -21,7 +21,8 @@ export default class Empty extends Component {
           : <div className="_empty-tip">
             {
               this.props.text || <span>
-                <i className="fa fa-exclamation-triangle u-mr10" />无数据
+                <i className="fa fa-exclamation-triangle u-mr10" />
+                没东西
               </span>
             }
           </div>

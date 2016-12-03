@@ -14,28 +14,11 @@ var markdown = require("markdown-js")
 
 function formatHTML(title, content) {
   return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <link rel="shortcut icon" href="http://www.woolson.cn/favicon.ico" type="image/x-icon">
-      <meta charset="text/html; charset=UTF-8" http-equiv="content-type">
-      <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-      <meta content="telephone=no" name="format-detection">
-      <meta content="address=no" name="format-detection">
-      <title>${title}</title>
-      <link rel="stylesheet" href="http://www.woolson.cn/assets/styles/md-themes/monokai.css">
-      <link rel="stylesheet" href="https://dn-maxiang.qbox.me/res-min/themes/marxico.css">
-      <link rel="stylesheet" href="http://www.woolson.cn/assets/styles/common-css.css">
-      <script src="http://www.woolson.cn/assets/js/highlight.pack.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script>
-    </head>
-    <body>
       <div id="content">
         <a id="common-back">back</a>
         ${content}
         <div id="disqus_thread"></div>
       </div>
-      <script src="http://www.woolson.cn/assets/js/common-js.js"></script>
       <script>
         (function() { // DON'T EDIT BELOW THIS LINE
           var d = document, s = d.createElement('script');
@@ -45,13 +28,12 @@ function formatHTML(title, content) {
         })();
       </script>
       <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </body>
-    </html>
   `
 }
 
 export default app => {
   app.param("article_name", (req, res, next, name) => {
+    console.log(name)
     let filePath, content, html
     filePath = path.join(__dirname, "../../../", `/static/articles/${name}.md`)
     try {
@@ -65,7 +47,7 @@ export default app => {
     next()
   })
 
-  app.get("/study/:article_name", (req, res) => {
+  app.get("/study/fetchArticle/:article_name", (req, res) => {
     res.end()
   })
 }

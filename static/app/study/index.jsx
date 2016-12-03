@@ -12,6 +12,7 @@ import moment from "moment"
 import Tab from "_tab"
 import Empty from "_block-with-empty"
 import { isEmpty } from "utils"
+import { browserHistory } from "react-router"
 
 const TabList = [
   "All",
@@ -59,12 +60,21 @@ export default React.createClass({
     location.href = page
   },
 
+  showArticle(data) {
+    browserHistory.push({
+      pathname: "article",
+      query: {
+        is: `${data.article}`,
+      },
+    })
+  },
+
   renderList() {
     return this.filterList().map(item => {
-      return <div id={item.id}
-        key={item.id}
+      return <div id={ item.id }
+        key={ item.id }
         className="study-item"
-        onClick={ this.redirect.bind(null, `./study/${item.article || "test"}`) }
+        onClick={ this.showArticle.bind(this, item) }
       >
         <a>{item.title}</a>
 
@@ -90,10 +100,6 @@ export default React.createClass({
     })
   },
 
-  pullBack() {
-    this.setState({index: 0})
-  },
-
   render() {
     return <div className="study-list">
       <Tab
@@ -112,6 +118,8 @@ export default React.createClass({
           { this.renderList() }
         </div>
       </Empty>
+
+      { this.props.children }
     </div>
   },
 })
