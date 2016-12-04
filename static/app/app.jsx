@@ -30,18 +30,13 @@ const App = React.createClass({
     }
   },
 
-  componentDidMount() {
-    window.onload = function() {
-      console.log("load")
-    }
-  },
-
   getIndex() {
     const path = this.props.location.pathname
     let navIndex = Navs.findIndex(o => path.has(o.toLowerCase()))
     if(path == "/") navIndex = 0
-    if(path == "article") navIndex = 1
+    if(path.has("article")) navIndex = 1
 
+      console.log(path, navIndex)
     return navIndex
   },
 
@@ -54,8 +49,6 @@ const App = React.createClass({
   },
 
   renderNavs() {
-    
-
     return Navs.map((item, index) => {
       return <li
         key={ index }

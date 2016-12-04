@@ -48,13 +48,17 @@ body
 .content-navs_pc_info
   display flex
   flex-direction column
-  justify-content center
+  justify-content flex-start
   align-items center
   padding: 60px 0 40px 0
+  box-sizing border-box
+  height 218px
   img
     width 80px
+    height 80px
     border-radius 100%
     border 2px solid white
+    box-sizing border-box
 
 .content-navs_pc_nav
   flex: 1
@@ -67,7 +71,8 @@ body
   padding 0
   list-style none
   position relative
-  color: white
+  color white
+  overflow auto
   li
     width 100%
     padding 20px
@@ -141,7 +146,7 @@ body
 .content-navs_pc_copyright
   margin auto 0 0 0
   padding 0
-  color white
+  color black
   height 40px
   display block
   width 100%
@@ -149,3 +154,4 @@ body
   text-align center
   z-index 9999
   font-size 12px
+  opacity 0.15

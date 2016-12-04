@@ -11,34 +11,27 @@ let Tab = React.createClass({
   },
 
   onChange(index, e) {
-    $(this.refs.filter).find("li").removeClass("active")
-    $(e.target).closest("li").addClass("active")
+    this.setState({index: index})
+    this.props.onChange && this.props.onChange(index)
+  },
 
-    this.props.onChangeCB(index)
+  renderItems() {
+    return this.props.tabList.map((item, index) => {
+      const className = index == this.state.index ? "active" : ""
+      return <li
+        key={ index }
+        className={ className }
+        onClick={ this.onChange.bind(null, index) }
+      >
+        { item }
+      </li>
+    })
   },
 
   render() {
-    let tabList = []
-    let className
-
-    this.props.tabList.map((item, key) => {
-      className = key == this.state.index ? "active" : ""
-      return tabList.push(
-        <li
-          key={ key }
-          className={ className }
-          onClick={ this.onChange.bind(null, key) }
-        >
-          { item }
-        </li>
-      )
-    })
-
-    return (
-      <div className="_tab" ref="_tab">
-        <ul ref="filter">{ tabList }</ul>
-      </div>
-    )
+    return <ul className="_tab" ref="filter">
+      { this.renderItems() }
+    </ul>
   }
 })
 

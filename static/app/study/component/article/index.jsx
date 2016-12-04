@@ -3,7 +3,7 @@
 * @Date:   2016-12-03 20:53:13
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-03 23:44:52
+* @Last Modified time: 2016-12-04 12:47:40
 */
 
 import "./style"
@@ -28,7 +28,6 @@ export default class Article extends Component {
   }
 
   componentWillUnmount() {
-    console.log(123)
     $(".article-file").remove()
   }
 
@@ -36,11 +35,10 @@ export default class Article extends Component {
     const name = this.props.location.query.is
 
     $.get(__HOST__ + `/study/fetchArticle/${name}`)
-      // .then(d => this.setState({__html: d}))
       .then(d => {
         this.refs.article.innerHTML = d
         setTimeout(() => {
-          $(this.refs.article).fadeIn()
+          $(this.refs.article).fadeIn(300)
         }, 300)
         setTimeout(() => {
           $("head").append(`<script src="http://www.woolson.cn/assets/js/common-js.js"></script>`)

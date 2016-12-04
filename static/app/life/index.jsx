@@ -7,17 +7,24 @@
 */
 
 import "./style"
-import React from "react"
-import ReactDOM from "react-dom"
+import React, { Component } from "react"
+import Tab from "_tab"
 
-var Life = React.createClass({
-  render: function() {
-    return (
-      <div className="life-page">
-        Life
-      </div>
-    )
-  },
-})
+import Travel from "./component/travel"
 
-export default Life
+export default class Life extends Component {
+  state = {
+    index: 0,
+  }
+
+  render() {
+    return <div className="life-page">
+      <Tab
+        tabList={ ["Travel", "Share"] }
+        onChange={ index => this.setState({index: index}) }
+      />
+
+      { !this.state.index && <Travel /> }
+    </div>
+  }
+}

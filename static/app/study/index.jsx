@@ -84,7 +84,7 @@ export default React.createClass({
             { item.tags }
           </span>
 
-          <span className="u-ml20">
+          <span className="u-ml10">
             <i className="fa fa-calendar u-mr5"/>
             { item.date }
           </span>
@@ -105,7 +105,7 @@ export default React.createClass({
       <Tab
         ref="tabList"
         tabList={TabList}
-        onChangeCB={ (index) => {
+        onChange={ (index) => {
             this.setState({tabIndex: index})
           }}
       />

@@ -9,52 +9,10 @@
     height: 100vh
     flex-direction: column
   ._tab
-    overflow hidden
-    padding 40px 0
-    border-right: 1px solid #DDD
-    height 100vh
-    background white
-    margin-left -80px
-    animation slideRight .5s
-    animation-fill-mode forwards
-    @keyframes slideRight
-      0% {
-        margin-left -80px
-      }
-      100% {
-        margin-left 0px
-      }
-    ul
-      display flex
-      flex-direction column
-      li
-        flex 1
-        display flex
-        align-items center
-        justify-content center
-        width 60px
-        height 60px
-        margin 0 10px
-        color #666
-        box-sizing border-box
-        border-radius 100%
-        background white
-        cursor pointer
-        &:hover
-          color: white !important
-          animation background .5s
-          animation-fill-mode forwards
-          background linear-gradient(45deg, $main-blue, $main-green)
-          @keyframes background
-            0% {
-              opacity .5
-            }
-            100% {
-              opacity 1
-            }
-          
+    padding 60px 0
+
   .artical-list
-    padding 60px 10px
+    padding 20px 10px
     flex 5
     overflow auto
     width 100%
@@ -62,23 +20,26 @@
     display flex
     justify-content flex-start
     align-items flex-start
+    flex-direction column
+    align-self flex-start
     .study-item
-      flex 1
+      width 100%
+      max-width 1000px
       margin-right 10px
-      max-height 200px
       box-sizing border-box
       padding 10px 20px 20px 20px
       margin-bottom 10px
       background white
-      transition 0.4s ease-in-out
+      transition 0.3s ease-in-out
       border-radius  0 5px 5px 0
       background-size 2px 100%
       background-repeat no-repeat
       border-left 3px solid $main-blue
       cursor pointer
       &:hover
-        border-left-color $main-green
-        background linear-gradient(45deg, rgba($main-blue, .8), rgba($main-green, .8))
+        box-shadow 5px 5px 10px rgba(black, .05)
+        border-left-color $main-blue
+        background linear-gradient(to right, rgba($main-blue, .8), rgba($main-green, .8))
         background-repeat no-repeat
         background-size 100% 100%
         border-radius 5px
@@ -104,8 +65,8 @@
         margin-top 10px
         margin-bottom 10px
         line-height 22px
-        color #444
-        height 70px
+        color #2D3F50
+        height 40px
       .study-tag span
         color: darken($border-gray, 20%)
         padding-left 10px

@@ -1,14 +1,47 @@
-@require "../../../style/global"
+@require "global"
 
 ._tab
+  overflow hidden
+  padding 40px 0
+  box-shadow 0 0 5px rgba(black, .15)
+  height 100vh
+  background white
+  margin-left -80px
+  animation slideRight .5s
+  animation-fill-mode forwards
   box-sizing border-box
-  ul
-    list-style: none
-    margin: 0
-    padding: 0
-    color: #666
-    li
-      text-align: center
-      cursor: pointer
-    li.active
-      color: $main-blue !important
+  padding 0
+  margin 0
+  @keyframes slideRight
+    0% {
+      margin-left -80px
+    }
+    100% {
+      margin-left 0px
+    }
+  li
+    display flex
+    align-items center
+    justify-content center
+    width 60px
+    height 60px
+    margin 0 10px
+    color #666
+    box-sizing border-box
+    border-radius 100%
+    background white
+    cursor pointer
+    &.active
+      color $main-blue
+    &:hover
+      color white !important
+      animation background .5s
+      animation-fill-mode forwards
+      background linear-gradient(45deg, $main-blue, $main-green)
+      @keyframes background
+        0% {
+          opacity .5
+        }
+        100% {
+          opacity 1
+        }
