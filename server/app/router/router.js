@@ -6,9 +6,11 @@
 */
 
 import handler from "../handler"
-import studyPage from "./page/study"
-import messagePage from "./page/message"
-import articles from "./page/articles"
+import studyPage from "./component/study"
+import messagePage from "./component/message"
+import articles from "./component/articles"
+import githubAuth from "./component/oauth"
+import comments from "./component/comments"
 import path from "path"
 
 export default app => {
@@ -21,13 +23,13 @@ export default app => {
     //message page routers and apis
     messagePage(app)
 
+    //github auth route
+    githubAuth(app)
+
+    // comments routers
+    comments(app)
+
     app.get('*', (req, res) => {
-      const deviceAgent = req.headers["user-agent"].toLowerCase()
-      const agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/)
-      let htmlPath = "../../static/index.html"
-
-      if(agentID) htmlPath = "../../mobile/index.html"
-
-      res.sendFile(path.resolve(__dirname, htmlPath))
+      res.sendFile(path.resolve(__dirname, "../../static/index.html"))
     })
 }

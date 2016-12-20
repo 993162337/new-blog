@@ -15,7 +15,9 @@ var markdown = require("markdown-js")
 function formatHTML(title, content) {
   return `
       <div id="content">
-        <a id="common-back">back</a>
+        <a id="common-back">
+          <i class="fa fa-arrow-circle-left"></i>
+        </a>
         ${content}
         <div id="disqus_thread"></div>
       </div>
@@ -33,7 +35,6 @@ function formatHTML(title, content) {
 
 export default app => {
   app.param("article_name", (req, res, next, name) => {
-    console.log(name)
     let filePath, content, html
     filePath = path.join(__dirname, "../../../", `/static/articles/${name}.md`)
     try {
@@ -50,4 +51,6 @@ export default app => {
   app.get("/study/fetchArticle/:article_name", (req, res) => {
     res.end()
   })
+
+  app.get("")
 }

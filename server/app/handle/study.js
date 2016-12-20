@@ -13,11 +13,10 @@ import { articleDB } from "../db/mongodb"
 const Article = articleDB()
 
 export default {
-    // fetch all article list
-    fetchAllArticle(req, res) {
-        Article.find({}, (err, docs) => {
-            console.log(docs);
-            jsonWrite(res, err ? {succ: false} : {articles: docs})
-        })
-    },
+  // fetch all article list
+  fetchAllArticle(req, res) {
+    Article.find({}, (err, docs) => {
+      jsonWrite(res, err ? {succ: false} : {articles: docs})
+    })
+  },
 }

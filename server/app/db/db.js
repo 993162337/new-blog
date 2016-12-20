@@ -16,7 +16,7 @@ db.on("error", err => {
 })
 
 db.once("open", err => {
-    console.info("Mongo db connected successfully")
+  console.info("Mongo db connected successfully")
 })
 
 module.exports = db
