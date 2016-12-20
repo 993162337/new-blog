@@ -3,7 +3,7 @@
 * @Date:   2016-06-16 16:06:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 22:11:55
+* @Last modified time: 2016-12-10 00:12:21
 */
 
 import "./style"
@@ -13,15 +13,9 @@ import cx from "classnames"
 import Empty from "_block-with-empty"
 
 const Color = [
-  "#f1793d",
-  "#E9AA30",
-  "#fae941",
-  "#AFF56E",
   "#03B765",
   "#25c9c2",
-  "#55CAF5",
   "#258ec7",
-  "#ea75a9",
   "#F74902",
 ]
 
@@ -87,7 +81,7 @@ export default React.createClass({
     if(!this.state.messageList) return null
 
     return this.state.messageList.reverse().map((item, index) => {
-      const color = Color[~~(Math.random() * 10)]
+      const color = Color[~~(Math.random() * 3)]
       const klass = index % 2 == 0 ? "node-left" : "node-right"
 
       return <div className="node-item">

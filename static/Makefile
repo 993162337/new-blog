@@ -23,19 +23,15 @@ build-vendors:
 	@echo -e "\033[1;32m Complete build vendors ... !\033[m"
 
 build-app:
-	webpack-dev-server --config webpack.config.js --hot --inline --progress --history-api-fallback
+	webpack-dev-server --config webpack.config.js --host 0.0.0.0 --hot --inline --progress --history-api-fallback
 
 build-app-compress:
 	@echo -e "\033[1;32m Building production ... !\033[m"
 	rm -rf `ls _production/*.*.css _production/*.*.js|egrep -v 'vendors*'`
 	touch app.styl
-	touch mobile.styl
 	NODE_ENV=production webpack --config webpack.production.config.js --colors --progress
 	@echo -e "\033[1;32m Build production successful !\033[m"
-	make build-mobile
 
 deploy-web:
-	# cp -rf dev/ ../sever/templates
 	@echo -e "\033[1;32m Syncing files to static resource of server\033[m"
 	rsync -r -l --progress --delete _production/ root@123.206.220.242:/home/woolson/static
-	# rsync -r -l --progress --delete _mobile/ root@123.206.220.242:/home/woolson/mobile

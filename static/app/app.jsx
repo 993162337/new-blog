@@ -62,53 +62,51 @@ const App = React.createClass({
   render() {
     return <div className="app">
       <div className="app-navs">
-        {
-          Global.equiv == "mobile"
-            ? <div
-                className="content-navs_mobile"
-                onClick={ () => {
-                  const $nav = $(this.refs.nav)
-                  const option = $nav.is(":hidden") ? "slideDown" : "slideUp"
-                  $nav[option](300)
-                } }
-              >
-                <i className="fa fa-bars" />
+        <div
+          className="content-navs_mobile"
+          onClick={ () => {
+            const $nav = $(this.refs.nav)
+            const option = $nav.is(":hidden") ? "slideDown" : "slideUp"
+            $nav[option](300)
+          } }
+        >
+          <i className="fa fa-bars" />
 
-                <ul ref="nav" className="">
-                  { this.renderNavs() }
-                </ul>
-              </div>
-            : <div className="content-navs_pc">
-                <div className="content-navs_pc_info">
-                  <img 
-                    className="u-mb20"
-                    src={ require("./assets/images/logo.png") }
-                  />
+          <ul ref="nav" className="">
+            { this.renderNavs() }
+          </ul>
+        </div>
 
-                  <a
-                    className={ cx("content-body__header_contact", {mobile: Global.equiv == "mobile"}) }
-                    href="https://github.com/993162337" target="_blank"
-                  >
-                    <i className="fa fa-github" />
-                  </a>
-                </div>
+        <div className="content-navs_pc">
+          <div className="content-navs_pc_info">
+            <img 
+              className="u-mb20"
+              src={ require("./assets/images/logo.png") }
+            />
 
-                <ul ref="root" className="content-navs_pc_nav">
-                  <li
-                    className="highLight"
-                    ref="highLight"
-                    style={{
-                      transform: `translate(0, ${65 * this.getIndex()}px)`,
-                      transition: "all .4s",
-                    }} />
-                  { this.renderNavs() }
-                </ul>
+            <a
+              className={ cx("content-body__header_contact", {mobile: Global.equiv == "mobile"}) }
+              href="https://github.com/993162337" target="_blank"
+            >
+              <i className="fa fa-github" />
+            </a>
+          </div>
 
-                <foot className="content-navs_pc_copyright">
-                  ® 2015 woolson Inc. All rights reserved.
-                </foot>
-              </div>
-        }
+          <ul ref="root" className="content-navs_pc_nav">
+            <li
+              className="highLight"
+              ref="highLight"
+              style={{
+                transform: `translate(0, ${65 * this.getIndex()}px)`,
+                transition: "all .4s",
+              }} />
+            { this.renderNavs() }
+          </ul>
+
+          <foot className="content-navs_pc_copyright">
+            ® 2015 woolson Inc. All rights reserved.
+          </foot>
+        </div>
       </div>
 
       <div

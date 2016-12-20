@@ -19,6 +19,10 @@ export function isEmpty(obj) {
   if(typeof obj == "string") {
     return obj == ""
   }
+
+  if(obj == null || obj == undefined) {
+    return true
+  }
 }
 
 export function getStorage(key) {
@@ -58,4 +62,16 @@ export function deParams(url) {
   }
 
   return r
+}
+
+export function Msg(msg, type = "tip") {
+  const types = ["tip", "warn", "error"]
+  if(!types.has(type)) console.warn("Utils Msg's type is One of ", types)
+
+  const previousZIndex = $(".global-top-msg").last().css("zIndex") || 3000
+  const zIndex = parseInt(previousZIndex) + 1
+  const content = `<div class="global-top-msg ${type}">${msg}</div>`
+  const $div = $(content).appendTo("body").css("zIndex", zIndex)
+
+  setTimeout(() => $div.remove(), 2500)
 }

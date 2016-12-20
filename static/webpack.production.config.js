@@ -83,11 +83,7 @@ module.exports = {
             if(item.entry) fileHash[item.names[0] + "JS"] = item.hash
           })
 
-          var cssFile = ["app.styl", "style/mobile.styl"]
-          var files = ["app", "mobile"]
-          files.forEach(function(item, index) {
-            File.createCss(cssFile[index], item)
-          })
+          File.createCss("app.styl", "app")
           File.replace("_production/index.html")
         }
       })

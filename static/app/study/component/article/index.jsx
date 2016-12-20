@@ -3,15 +3,18 @@
 * @Date:   2016-12-03 20:53:13
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-04 12:47:40
+* @Last Modified time: 2016-12-20 17:43:54
 */
 
 import "./style"
 import React, { Component } from "react"
+import { browserHistory } from "react-router"
+import Comment from "_comment"
+import { Msg, isEmpty } from "utils"
 
 export default class Article extends Component {
   state = {
-    __html: "",
+    comments: [],
   }
 
   componentWillMount() {
@@ -25,6 +28,7 @@ export default class Article extends Component {
 
   componentDidMount() {
     this.fetchArticle()
+    this.fetchComment()
   }
 
   componentWillUnmount() {
@@ -32,13 +36,15 @@ export default class Article extends Component {
   }
 
   fetchArticle() {
-    const name = this.props.location.query.is
+    const state = this.props.location.state
 
-    $.get(__HOST__ + `/study/fetchArticle/${name}`)
+    if(isEmpty(state)) browserHistory.push("/study")
+
+    $.get(__HOST__ + `/study/fetchArticle/${state.article}`)
       .then(d => {
         this.refs.article.innerHTML = d
         setTimeout(() => {
-          $(this.refs.article).fadeIn(300)
+          $(this.refs.root).fadeIn(300)
         }, 300)
         setTimeout(() => {
           $("head").append(`<script src="http://www.woolson.cn/assets/js/common-js.js"></script>`)
@@ -47,10 +53,48 @@ export default class Article extends Component {
       })
   }
 
+  fetchComment() {
+    const state = this.props.location.state
+
+    $.get(__HOST__ + "/fetchComments", {aid: state.aid})
+      .then(d => this.setState({comments: d.comments.reverse()}))
+  }
+
+  onSubmit(data) {
+    const param = {
+      aid: 1,
+      type: data.replyID ? 1 : 0,
+      reply_id: data.replyID,
+      reply_name: data.replyName,
+      author: "woolson",
+      comment_id: data.commentID,
+      message: data.message,
+    }
+
+    $.post(__HOST__ + "/insertComment", param)
+      .then(d => {
+        if(d.succ) {
+          Msg("提交成功！")
+          this.fetchComment()
+        }
+        else Msg("提交失败, 请重试！", "error")
+      })
+  }
+
   render() {
     return <div
-      ref="article"
+      ref="root"
       className="study-article"
-    />
+    >
+      <div
+        ref="article"
+        className="study-article__content"
+      />
+
+      <Comment
+        data={ this.state.comments }
+        onSubmit={ this.onSubmit.bind(this) }
+      />
+    </div>
   }
 }

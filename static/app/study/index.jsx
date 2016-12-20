@@ -39,7 +39,10 @@ export default React.createClass({
 
   updateData() {
     $.get(__HOST__ + "/fetchAllArticle")
-      .then(d => this.setState({list: d.articles}))
+      .then(d => {
+        const data = d.articles.reverse()
+        this.setState({list: data})
+      })
   },
 
   filterList() {
@@ -63,8 +66,9 @@ export default React.createClass({
   showArticle(data) {
     browserHistory.push({
       pathname: "article",
+      state: data,
       query: {
-        is: `${data.article}`,
+        is: data.article,
       },
     })
   },
