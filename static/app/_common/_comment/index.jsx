@@ -3,12 +3,13 @@
 * @Date:   2016-12-16 23:16:17
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-20 17:48:04
+* @Last Modified time: 2016-12-20 21:42:45
 */
 
 import "./style"
 import React, { Component } from "react"
-import { isEmpty } from "utils"
+import cx from "classnames"
+import { isEmpty, Msg } from "utils"
 
 export default class Comment extends Component {
   static defaultProps = {
@@ -22,6 +23,13 @@ export default class Comment extends Component {
   }
 
   submitComment(replyID, replyName, commentID, evt) {
+    const $button = $(evt.target).closest("button")
+    if($button.is(".disabled")) {
+      Msg("请先使用Github登录！", "warn")
+      return
+    }
+
+    return
     const data = {
       message: $(evt.target).prev("textarea").val(),
       replyID: replyID,
@@ -44,7 +52,10 @@ export default class Comment extends Component {
         className="_comment-input__textarea"
       />
 
-      <button onClick={ this.submitComment.bind(this, replyID, replyName, commentID) }>
+      <button
+        className={ cx({disabled: isEmpty(Global.user)}) }
+        onClick={ this.submitComment.bind(this, replyID, replyName, commentID) }
+      >
         <i className="fa fa-check"/>
       </button>
     </div>

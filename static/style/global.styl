@@ -1,4 +1,5 @@
 @require "./default"
+@require "./animation"
 
 $main-blue = #0FBAE5
 $main-red = #DA4040
@@ -32,6 +33,12 @@ body
 ::-webkit-scrollbar-thumb:active
   background darken($main-green, 20%)
 
+top-msg-theme(theme_color)
+  border: 1px solid darken(theme_color, 5%)
+  background: rgba(theme_color, 0.8)
+  box-shadow: 0 0 5px darken(theme_color, 15%)
+  text-shadow: 0 0 1px darken(theme_color, 15%)
+
 .global-top-msg
   position: absolute
   width: 250px
@@ -47,10 +54,10 @@ body
   text-align: center
   color: white !important
   top: 0
-  opacity: 0
+  // opacity: 0
   animation: slideInDown 2.5s
-  top-msg-theme($main)
+  top-msg-theme($main-green)
   &.warn
-    top-msg-theme($yellow)
+    top-msg-theme($main-yellow)
   &.error
-    top-msg-theme($red)
+    top-msg-theme($main-red)

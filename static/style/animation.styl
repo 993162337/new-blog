@@ -107,3 +107,21 @@
   100% {
     transform: rotate(360deg)
   }
+  
+@keyframes slideInDown
+  0% {
+    transform: translate3d(0, -100%, 0)
+    opacity: 0
+  }
+  20% {
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+  }
+  70% {
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+  }
+  100% {
+    opacity: 0
+    transform: translate3d(0, -100%, 0)
+  }
