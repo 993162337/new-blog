@@ -1,3 +1,6 @@
+import { render } from "react-dom"
+import Modal from "_modal"
+
 export function getJSON(url, data){
   return new Promise(function(resolve, reject){
     $.getJSON(url, data, resolve)
@@ -74,4 +77,27 @@ export function Msg(msg, type = "tip") {
   const $div = $(content).appendTo("body").css("zIndex", zIndex)
 
   setTimeout(() => $div.remove(), 2500)
+}
+
+export function Alert(title, text, cb) {
+  let $div = $("<div />").appendTo("body")
+  render(<Modal
+    type="alert"
+    removeOnCancel={ true }
+    immediatelyShow={ true }
+    title={ title }
+    text={ text }
+    okBtnCB={ cb }
+  />, $div.get(0))
+}
+
+export function Query(title, content, cb) {
+  let $div = $("<div />").appendTo("body")
+  render(<Modal
+    type="query"
+    removeOnCancel={ true }
+    immediatelyShow={ true }
+    title={ title }
+    okBtnCB={ cb }
+  >{ content }</Modal>, $div.get(0))
 }

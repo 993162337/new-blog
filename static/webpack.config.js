@@ -40,7 +40,8 @@ module.exports = {
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.DefinePlugin({
         __DEV__: true,
-        __HOST__: JSON.stringify("http://woolson.cn"),
+        __HOST__: JSON.stringify("http://localhost:8081"),
+        // __HOST__: JSON.stringify("http://woolson.cn"),
     }),
     ],
     resolve: {

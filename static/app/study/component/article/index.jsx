@@ -3,7 +3,7 @@
 * @Date:   2016-12-03 20:53:13
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-20 17:43:54
+* @Last Modified time: 2016-12-21 21:08:56
 */
 
 import "./style"
@@ -61,12 +61,13 @@ export default class Article extends Component {
   }
 
   onSubmit(data) {
+    const state = this.props.location.state
     const param = {
-      aid: 1,
+      aid: state.aid,
       type: data.replyID ? 1 : 0,
       reply_id: data.replyID,
       reply_name: data.replyName,
-      author: "woolson",
+      uid: Global.user.id,
       comment_id: data.commentID,
       message: data.message,
     }

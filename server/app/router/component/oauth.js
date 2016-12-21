@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 00:31:52
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-20 17:14:42
+* @Last Modified time: 2016-12-21 18:14:32
 */
 import request from "request"
 import { fetchUrlwithParams, getParamFromStr, jsonWrite, isEmpty } from "../../global/utils"
@@ -29,18 +29,16 @@ export default app => {
           }
         }
         request(param, (err, response, body) => {
-          console.log("get-info", body)
           body = JSON.parse(body)
           if(!body.message) insertGithub(req, res, body)
-          else res.redirect("http://woolson.cn")
+          else res.redirect("/study")
         })
-      }else res.redirect("http://woolson.cn")
+      }else res.redirect("/")
     })
   })
  
   app.get("/oauth/login", (req, res) => {
     const userID = req.cookies.user
-    console.log(userID)
     if(userID) getLoginUser(req, res)
     else jsonWrite(res)
   })
