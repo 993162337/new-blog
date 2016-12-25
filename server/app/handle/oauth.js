@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 16:34:11
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-20 17:09:10
+* @Last Modified time: 2016-12-24 18:54:55
 */
 
 import mongoose from "mongoose"
@@ -29,9 +29,7 @@ exports.insertGithub = (req, res, d) => {
     updated_at: d.updated_at || ""
   }
 
-  const user = new User(data)
-
-  user.save((err, docs) => {
+  User.find({id: d.id}, (err, docs) => {
     const param = {
       domain: ".woolson.cn",
       maxAge: 5184000000,
@@ -39,8 +37,18 @@ exports.insertGithub = (req, res, d) => {
       secure: false,
       path: "/",
     }
-    res.cookie("user", hashs.nameHash, param)
-    res.redirect("/study")
+
+    if(docs && docs.length !== 0) {
+      const user = new User(data)
+
+      user.save((err, docs) => {
+        res.cookie("user", hashs.nameHash, param)
+        res.redirect("/study")
+      })
+    }else {
+      res.cookie("user", hashs.nameHash, param)
+      res.redirect("/study")
+    }
   })
 }
 

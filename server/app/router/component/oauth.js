@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 00:31:52
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 18:14:32
+* @Last Modified time: 2016-12-25 21:38:14
 */
 import request from "request"
 import { fetchUrlwithParams, getParamFromStr, jsonWrite, isEmpty } from "../../global/utils"
@@ -20,7 +20,7 @@ export default app => {
     }
 
     request(fetchUrlwithParams(param), (err, response, body) => {
-      body = getParamFromStr(body)
+      body = JSON.parse(body)
       if(body.access_token) {
         const param = {
           url: "https://api.github.com/user?access_token=" + body.access_token,

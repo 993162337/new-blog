@@ -3,7 +3,7 @@
 * @Date:   2016-12-18 00:13:48
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 21:42:53
+* @Last Modified time: 2016-12-21 22:05:32
 */
 
 import handler from "../../handle/comment"
@@ -25,7 +25,7 @@ export default app => {
   })
 
   // agree operation
-  app.get("/addCommentAgree", (req, res) => {
+  app.post("/addCommentAgree", (req, res) => {
     handler.insertAgree(req, res)
   })
 }

@@ -3,14 +3,15 @@
 * @Date:   2016-12-18 00:15:45
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 18:41:28
+* @Last Modified time: 2016-12-21 22:55:29
 */
 
 import mongoose from "mongoose"
 import { jsonWrite } from "../global/utils"
-import { commentsDB, usersDB } from "../db/mongodb"
+import { commentsDB, usersDB, agreesDB } from "../db/mongodb"
 
 const Users = usersDB()
+const Agree = agreesDB()
 const Comment = commentsDB()
 
 const construct = function(data) {
@@ -26,13 +27,14 @@ const construct = function(data) {
   return result
 }
 
-const addUserInfo = (comments, users) => {
+const addUserAgree = (comments, users, agrees) => {
   comments.forEach(item => {
     const user = users.filter(o => item.uid == o.id)[0] || {}
 
     item.author_name = user.name
     item.html_url = user.html_url
     item.avatar_url = user.avatar_url
+    item.agrees = agrees.filter(o => o.comment_id == item._id)
 
     if(item.reply_id) {
       const reply = users.filter(o => item.reply_id == o.id)[0] || {}
@@ -55,19 +57,26 @@ export default {
         .exec((err, docs) => docs)
         .then(data => {
           let uids = new Set()
-          data.forEach(o => uids.add(o.uid))
+          let cids = new Set()
 
-          Users.find({id: {$in: [...uids]}})
-            .lean()
-            .exec((err, docs) => {
-              if(!err && docs) {
-                const comments = addUserInfo(data, docs)
-                jsonWrite(res, {succ: true, comments: construct(comments)})
-              }else jsonWrite(res)
-            })
+          data.forEach(o => {
+            cids.add(o._id)
+            uids.add(o.uid)
+          })
+
+          Promise.all([
+              Agree.find({comment_id: {$in: [...cids]}})
+                .lean()
+                .exec((err, docs) => docs)
+              ,
+              Users.find({id: {$in: [...uids]}})
+                .lean()
+                .exec((err, docs) => docs)
+            ]).then(([agrees, users]) => {
+              const comments = addUserAgree(data, users, agrees)
+              jsonWrite(res, {succ: true, comments: construct(comments)})
+            }).catch(err => jsonWrite(res))
         })
-        // let comments = construct(docs)
-        // jsonWrite(res, err ? {succ: false} : {comments: comments}))
     }else {
       jsonWrite(res)
     }
@@ -82,15 +91,12 @@ export default {
     })
   },
 
-  // TODO: agree
-  // insertCommentAgree(req, res) {
-  //   const cid = req.query.cid
-  //   if(cid) {
-  //     Comment.findByIdAndUpdate({_id: cid}, {$inc: {agree: 1}}, (err, counter) => {
-  //       jsonWrite(res, {succ: err ? false : true})
-  //     })
-  //   }else {
-  //     jsonWrite(res, {succ: false})
-  //   }
-  // }
+  // insert agree
+  insertAgree(req, res) {
+    const agree = new Agree(req.body)
+
+    agree.save((err, docs) => {
+      jsonWrite(res, {succ: err ? false : true})
+    })
+  }
 }

@@ -37,7 +37,14 @@ const commentsDB = function() {
   return db.model("Comments")
 }
 
+const agreesDB = function() {
+  require("./agree.model")
+
+  return db.model("Agrees")
+}
+
 exports.usersDB = usersDB
+exports.agreesDB = agreesDB
 exports.articleDB = articleDB
 exports.messageDB = messageDB
 exports.commentsDB = commentsDB
