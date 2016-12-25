@@ -36,7 +36,6 @@ const App = React.createClass({
     if(path == "/") navIndex = 0
     if(path.has("article")) navIndex = 1
 
-      console.log(path, navIndex)
     return navIndex
   },
 

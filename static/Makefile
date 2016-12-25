@@ -2,7 +2,7 @@
 # @Date:   2016-11-10 10:11:00
 # @Email:  woolson.lee@gmail.com
 # @Last modified by:   woolson
-# @Last modified time: 2016-11-29 09:11:80
+# @Last modified time: 2016-12-25 20:12:95
 
 SHELL := /bin/bash
 
@@ -35,3 +35,7 @@ build-app-compress:
 deploy-web:
 	@echo -e "\033[1;32m Syncing files to static resource of server\033[m"
 	rsync -r -l --progress --delete _production/ root@123.206.220.242:/home/woolson/static
+
+deploy-art:
+	@echo -e "\033[1;32m Syncing article to static resource of server\033[m"
+	rsync -r -l --progress --delete _production/articles/ root@123.206.220.242:/home/woolson/static/articles

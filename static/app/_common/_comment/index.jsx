@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 23:16:17
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 21:41:49
+* @Last Modified time: 2016-12-24 19:48:32
 */
 
 import "./style"
@@ -67,19 +67,14 @@ export default class Comment extends Component {
 
   agree(commentID, type, evt) {
     if(isEmpty(Global.user)) return Msg("未登录不可此操作哦！", "error")
+    else if($(evt.target).is(".active")) return Msg(`你已经${ type ? "赞" : "踩" }过咯`, "warn")
 
     const param = {
-      uid: Global.user.id,
       comment_id: commentID,
       agree: type,
     }
 
-    $.getJSON(__HOST__ + "/addCommentAgree", param)
-      .then(d => {
-        const msg = type ? "点赞" : "踩"
-        if(d.succ) Msg(`${ msg }成功！`)
-        else Msg(`${ msg }失败, 请稍后重试！`, "error")
-      })
+    this.props.onAgree && this.props.onAgree(param)
   }
 
   renderComments(data, level = 0, commentID) {
@@ -87,6 +82,9 @@ export default class Comment extends Component {
     if(isEmpty(Data)) return <center>Be the first...</center>
 
     return Data.map((item, index) => {
+      const agree = item.agrees.filter(o => o.agree == 1).map(o => o.uid)
+      const disagree = item.agrees.filter(o => o.agree == 0).map(o => o.uid)
+
       return <div className="_comment-content__item">
         <img src={ item.avatar_url } />
 
@@ -115,20 +113,26 @@ export default class Comment extends Component {
           <div className="evaluation">
             <span>
               <i
-                className="fa fa-angle-up"
+                className={ cx("fa fa-angle-up u-mr5", {
+                    active: agree.has((Global.user || {}).id)
+                  })
+                }
                 onClick={ this.agree.bind(this, item._id, 1) }
               />
-              { item.agree || 0 }
+              { agree.length || 0 }
             </span>
 
             <span className="u-ml5 u-mr5">|</span>
 
             <span>
               <i
-                className="fa fa-angle-down"
+                className={ cx("fa fa-angle-down u-mr5", {
+                    active: disagree.has((Global.user || {}).id)
+                  })
+                }
                 onClick={ this.agree.bind(this, item._id, 0) }
               />
-              { item.disagree || 0 }
+              { disagree.length || 0 }
             </span>
 
             <i
@@ -161,6 +165,16 @@ export default class Comment extends Component {
     })
   }
 
+  logout() {
+    let newCookie = `user=;expires=-1;domain=woolson.cn`
+    document.cookie = newCookie
+    Msg("Logout success!")
+
+    setTimeout(function () {
+      window.location.reload()
+    }, 3000)
+  }
+
   render() {
     return <div className="_comment">
       <div className="_comment-header">
@@ -170,12 +184,16 @@ export default class Comment extends Component {
           isEmpty(Global.user)
             ? <span
                 className="u-mlauto"
-                onClick={ () => location.href = "https://github.com/login/oauth/authorize?client_id=72e5cae736efb0366ffc&redirect_uri=http://woolson.cn/oauth/github&state=23ede2ewedqwe" }
+                onClick={ () => location.href = "https://github.com/login/oauth/authorize?client_id=72e5cae736efb0366ffc&redirect_uri=http://www.woolson.cn/oauth/github&state=23ede2ewedqwe" }
               >
                 <i className="fa fa-github u-mr5" />
                 Login with Github
               </span>
-            : <span className="u-mlauto">
+            : <span
+                className="u-mlauto"
+                title="Click to Logout"
+                onClick={ this.logout }
+              >
                 Login with:&nbsp;
                 { Global.user.name }
               </span>

@@ -3,7 +3,7 @@
 * @Date:   2016-12-03 20:53:13
 * @Email:   woolson.lee@gmail.com
 * @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 21:08:56
+* @Last Modified time: 2016-12-21 23:52:59
 */
 
 import "./style"
@@ -82,6 +82,21 @@ export default class Article extends Component {
       })
   }
 
+  onAgree(data) {
+    data.uid = Global.user.id
+
+    $.post(__HOST__ + "/addCommentAgree", data)
+      .then(d => {
+        const msg = data.agree ? "点赞" : "踩"
+
+        if(d.succ) {
+          Msg(`${ msg }成功！`)
+          this.fetchComment()
+        }
+        else Msg(`${ msg }失败, 请稍后重试！`, "error")
+      })
+  }
+
   render() {
     return <div
       ref="root"
@@ -95,6 +110,7 @@ export default class Article extends Component {
       <Comment
         data={ this.state.comments }
         onSubmit={ this.onSubmit.bind(this) }
+        onAgree={ this.onAgree.bind(this) }
       />
     </div>
   }
