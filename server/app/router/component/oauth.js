@@ -2,8 +2,8 @@
 * @Author: woolson
 * @Date:   2016-12-16 00:31:52
 * @Email:   woolson.lee@gmail.com
-* @Last Modified by:   woolson
-* @Last Modified time: 2016-12-25 21:38:14
+* @Last modified by:   woolson
+* @Last modified time: 2017-01-06 22:01:28
 */
 import request from "request"
 import { fetchUrlwithParams, getParamFromStr, jsonWrite, isEmpty } from "../../global/utils"
@@ -19,12 +19,20 @@ export default app => {
       // redirect_uri: "http://woolson.cn/oauth/github/accessed"
     }
 
-    request(fetchUrlwithParams(param), (err, response, body) => {
+    const data = {
+      url: fetchUrlwithParams(param),
+      headers: {
+        Accept: "application/json",
+      }
+    }
+
+    request(data, (err, response, body) => {
       body = JSON.parse(body)
       if(body.access_token) {
         const param = {
           url: "https://api.github.com/user?access_token=" + body.access_token,
           headers: {
+            Accept: "application/json",
             "User-Agent": "woolson's website",
           }
         }
@@ -36,7 +44,7 @@ export default app => {
       }else res.redirect("/")
     })
   })
- 
+
   app.get("/oauth/login", (req, res) => {
     const userID = req.cookies.user
     if(userID) getLoginUser(req, res)

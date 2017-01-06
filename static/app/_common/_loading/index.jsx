@@ -3,7 +3,7 @@
 * @Date:   2016-11-13 17:11:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-13 17:11:06
+* @Last modified time: 2017-01-06 21:01:02
 */
 
 /**
@@ -27,7 +27,6 @@ export const PlainLoading = ({ text = defaultText }) =>
     { text }
   </div>
 
-
 export default ({ text = defaultText }) =>
   <div className="_loading">
     <div className="_loading__content">
@@ -37,7 +36,6 @@ export default ({ text = defaultText }) =>
       </p>
     </div>
   </div>
-
 
 export const BlurLoading = ({ text = defaultText }) =>
   <div className="_loading-blur">
