@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 16:34:11
 * @Email:   woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2017-01-06 22:01:45
+* @Last modified time: 2017-01-16 16:01:76
 */
 
 import mongoose from "mongoose"
@@ -38,7 +38,7 @@ exports.insertGithub = (req, res, d) => {
       path: "/",
     }
 
-    if(docs && docs.length !== 0) {
+    if(docs && docs.length == 0) {
       const user = new User(data)
 
       user.save((err, docs) => {

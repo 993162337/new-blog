@@ -43,6 +43,10 @@ var extend = exports.extend = function extend() {
 var jsonWrite = exports.jsonWrite = function jsonWrite(res, ret) {
   if (!ret) ret = {};
   if (ret.succ === undefined) ret.succ = false;
+  res.set({
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache"
+  });
   res.json(ret);
 };
 

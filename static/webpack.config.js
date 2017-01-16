@@ -3,7 +3,7 @@
 * @Date:   2016-08-19 19:08:00
 * @Email:  woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-20 02:11:31
+* @Last modified time: 2017-01-16 16:01:98
 */
 
 var webpack = require("webpack")
@@ -40,8 +40,8 @@ module.exports = {
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.DefinePlugin({
         __DEV__: true,
-        __HOST__: JSON.stringify("http://localhost:8081"),
-        // __HOST__: JSON.stringify("http://woolson.cn"),
+        // __HOST__: JSON.stringify("http://localhost:8081"),
+        __HOST__: JSON.stringify("http://woolson.cn"),
     }),
     ],
     resolve: {

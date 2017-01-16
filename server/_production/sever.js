@@ -26,8 +26,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 * @Author: woolson
 * @Date:   2016-12-20 16:17:25
 * @Email:   woolson.lee@gmail.com
-* @Last Modified by:   woolson
-* @Last Modified time: 2016-12-21 12:11:28
+* @Last modified by:   woolson
+* @Last modified time: 2017-01-16 16:01:75
 */
 
 var app = (0, _express2.default)();
@@ -39,7 +39,7 @@ exports.default = function () {
   app.disable("x-powered-by");
 
   app.listen(8081, function () {
-    console.log("Server start at port 8081 \n");
+    return console.log("Server start at port 8081 \n");
   });
 
   return app;

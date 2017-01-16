@@ -18,6 +18,10 @@ export const extend = () => {
 export const jsonWrite = (res, ret) => {
   if(!ret) ret = {}
   if(ret.succ === undefined) ret.succ = false
+  res.set({
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+  })
   res.json(ret)
 }
 

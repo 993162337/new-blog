@@ -2,19 +2,12 @@
 # @Date:   2016-11-10 10:11:00
 # @Email:  woolson.lee@gmail.com
 # @Last modified by:   woolson
-# @Last modified time: 2016-12-25 20:12:95
+# @Last modified time: 2017-01-16 16:01:05
 
 SHELL := /bin/bash
 
 assets = "assets/vendor/"
 dist = "dist/"
-
-# 构建mobile
-build-mobile:
-	rm -rf _mobile/*
-	rsync -r --exclude="index.html" --exclude="public" _production/ _mobile/
-	cp html/m.index.html _mobile/index.html
-	node shell/build-mobile.js
 
 build-vendors:
 	rm _dev/vendors* _production/vendors*

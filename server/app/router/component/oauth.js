@@ -3,7 +3,7 @@
 * @Date:   2016-12-16 00:31:52
 * @Email:   woolson.lee@gmail.com
 * @Last modified by:   woolson
-* @Last modified time: 2017-01-06 22:01:28
+* @Last modified time: 2017-01-16 16:01:52
 */
 import request from "request"
 import { fetchUrlwithParams, getParamFromStr, jsonWrite, isEmpty } from "../../global/utils"
@@ -36,8 +36,10 @@ export default app => {
             "User-Agent": "woolson's website",
           }
         }
+
         request(param, (err, response, body) => {
           body = JSON.parse(body)
+
           if(!body.message) insertGithub(req, res, body)
           else res.redirect("/study")
         })

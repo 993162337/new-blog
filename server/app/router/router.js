@@ -2,7 +2,7 @@
 * @Author: wuzeng
 * @Date:   2016-07-17 01:05:19
 * @Last modified by:   woolson
-* @Last modified time: 2016-11-26 17:11:44
+* @Last modified time: 2017-01-10 12:01:70
 */
 
 import handler from "../handler"
@@ -30,6 +30,8 @@ export default app => {
     comments(app)
 
     app.get('*', (req, res) => {
+      console.log(req.originalUrl);
+
       res.sendFile(path.resolve(__dirname, "../../static/index.html"))
     })
 }
