@@ -1,0 +1,126 @@
+/**
+* @Author: woolson
+* @Date:   2016-11-10 21:11:00
+* @Email:  woolson.lee@gmail.com
+* @Last modified by:   woolson
+* @Last modified time: 2016-11-29 00:11:01
+*/
+
+html, body {
+  font-family: "Avenir";
+  padding: 0;
+  margin: 0;
+}
+
+#content {
+  position: relative;
+}
+
+@media screen and (max-width: 750px) {
+  #content {
+    padding: 25px 10px;
+    margin: 30px 0;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+  }
+}
+
+pre {
+  padding: 0;
+}
+
+pre code {
+  display: block;
+  border-radius: 5px;
+  background: #272822;
+  color: #ddd;
+}
+
+#preview-contents {
+  width: 60%;
+  margin: 5vh auto;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  border: 1px solid #CCC;
+  padding: 20px 40px;
+  position: relative;
+  box-sizing: border-box;
+  z-index: 1;
+  background: #FFF;
+}
+
+#common-bg {
+  width: 100vw;
+  height: 70vh;
+  background: red;
+  position: fixed;
+  top: 15vh;
+  z-index: 0;
+  background: url("./../../assets/images/bg.jpg") left top;
+  background-size: 70%;
+  /*opacity: .3;*/
+}
+
+#common-back {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: #A6DE2B;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 0 100% 100% 0;
+  cursor: pointer;
+  left: 250px;
+  top: 60px;
+}
+
+#common-back i {
+  font-size: 26px;
+}
+
+#common-back:hover {
+  text-decoration: none;
+}
+
+.static {
+  animation: static 1s;
+}
+
+@keyframes static {
+  0% {
+    top: 48vh;
+  }
+  100% {
+    top: 60px;
+  }
+}
+
+.float {
+  animation: float 1s;
+  animation-fill-mode : forwards;
+}
+
+@keyframes float {
+  0% {
+    top: 60px;
+  }
+  100% {
+    top: 48vh;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #common-back {
+    left: 100px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  #common-back {
+    left: 0;
+  }
+}

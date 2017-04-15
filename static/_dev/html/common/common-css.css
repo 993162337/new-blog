@@ -1,0 +1,75 @@
+/**
+* @Author: woolson
+* @Date:   2016-11-10 21:11:00
+* @Email:  woolson.lee@gmail.com
+* @Last modified by:   woolson
+* @Last modified time: 2016-11-11 23:11:23
+*/
+
+#preview-contents {
+  width: 60%;
+  margin: 5vh auto;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  border: 1px solid #CCC;
+  padding: 20px 40px;
+  position: relative;
+  box-sizing: border-box;
+  z-index: 1;
+  background: #FFF;
+}
+
+#common-bg {
+  width: 100vw;
+  height: 70vh;
+  background: red;
+  position: fixed;
+  top: 15vh;
+  z-index: 0;
+  background: url("./../../assets/images/bg.jpg") left top;
+  background-size: 70%;
+  /*opacity: .3;*/
+}
+
+#common-back {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: #A6DE2B;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 100%;
+  left: 18vw;
+  top: 2vh;
+  cursor: pointer;
+}
+
+.static {
+  animation: static 1s;
+}
+
+@keyframes static {
+  0% {
+    top: 48vh;
+  }
+  100% {
+    top: 2vh;
+  }
+}
+
+.float {
+  animation: float 1s;
+  animation-fill-mode : forwards;
+}
+
+@keyframes float {
+  0% {
+    top: 2vh;
+  }
+  100% {
+    top: 48vh;
+  }
+}
