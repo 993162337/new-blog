@@ -19,7 +19,7 @@ var fileHash = assign({}, vendors)
 var File = {
   replace: function(filePath) {
     var content = fs.readFileSync(filePath, "utf8")
-    var files = ["appJS", "initJS", "appCSS", "vendorsJS", "vendorsCSS", "mobileCSS"]
+    var files = ["appJS", "initJS", "vendorsJS", "vendorsCSS", "appCSS"]
 
     // replace string
     files.forEach(function(item) {
@@ -58,7 +58,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, "./_production"),
     filename: "[name].[chunkhash].min.js",
-    chunkFilename: "[name].[chunkhash].min.js"
+    chunkFilename: "[name].[chunkhash].min.js",
+    publicPath: "/static/",
   },
   externals: {
     "react": "window.React",

@@ -8,6 +8,7 @@
 */
 
 module.exports = {
-    uri: "mongodb://woolson:woolson@www.woolson.cn:27017/blog"
+    // uri: "mongodb://woolson:woolson@www.woolson.cn:27017/blog",
+    uri: "mongodb://localhost/blog"
 };
 //# sourceMappingURL=config.js.map

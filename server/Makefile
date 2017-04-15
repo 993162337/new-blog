@@ -14,5 +14,5 @@ deploy:
 	babel app/ -d _production/ -s
 	rm _production/package.json
 	cp package.json _production/package.json
-	rsync -r -l --progress --exclude="node_modules" --delete _production/ root@123.206.220.242:/home/woolson/blog
+	rsync -r -l --progress --exclude="node_modules" --delete _production/ root@115.159.203.146:/home/woolson/blog
 	@echo -e "\033[1;32m Release production success\033[m"

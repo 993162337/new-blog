@@ -22,7 +22,7 @@ types.forEach(function(type) {
     var hashPath = "vendors." + hash + ".min." + type
 
     // fs.renameSync("_dev/" + path, "_dev/" + hashPath)
-    fs.renameSync("_mobile/" + path, "_mobile/" + hashPath)
+    // fs.renameSync("_mobile/" + path, "_mobile/" + hashPath)
     fs.renameSync("_production/" + path, "_production/" + hashPath)
     hashs["vendors" + type.toUpperCase()] = hash
 })

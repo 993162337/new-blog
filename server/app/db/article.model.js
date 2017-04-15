@@ -14,9 +14,12 @@ const ArticleSchema = new mongoose.Schema({
     content: String,
     author: String,
     tags: String,
-    date: String,
     type: Number,
-    html: Number,
+    article: String,
+    date: {
+        type: Date,
+        default: Date.now
+    },
 })
 
 mongoose.model("Articles", ArticleSchema, "articles")
