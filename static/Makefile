@@ -31,4 +31,4 @@ deploy-web:
 
 deploy-art:
 	@echo -e "\033[1;32m Syncing article to static resource of server\033[m"
-	rsync -r -l --progress --delete _production/articles/ root@115.159.203.146:/home/woolson/static/articles
+	rsync -r -l --progress --delete articles/ root@115.159.203.146:/home/woolson/static/articles
